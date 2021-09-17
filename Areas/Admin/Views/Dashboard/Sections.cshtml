@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewData["Title"] = "Sections";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+
+@model Sportiga.Models.Categories
+
+@section Styles
+{
+    <style type="text/css">
+        .modal-confirm {
+            color: #636363;
+            width: 400px;
+        }
+
+            .modal-confirm .modal-content {
+                padding: 20px;
+                border-radius: 5px;
+                border: none;
+                text-align: center;
+                font-size: 14px;
+            }
+
+            .modal-confirm .modal-header {
+                border-bottom: none;
+                position: relative;
+            }
+
+            .modal-confirm h4 {
+                text-align: center;
+                font-size: 26px;
+                margin: 30px 0 -10px;
+            }
+
+            .modal-confirm .close {
+                position: absolute;
+                top: -5px;
+                right: -2px;
+            }
+
+            .modal-confirm .modal-body {
+                color: #999;
+            }
+
+            .modal-confirm .modal-footer {
+                border: none;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 13px;
+                padding: 10px 15px 25px;
+            }
+
+                .modal-confirm .modal-footer a {
+                    color: #999;
+                }
+
+            .modal-confirm .icon-box {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto;
+                border-radius: 50%;
+                z-index: 9;
+                text-align: center;
+                border: 3px solid #f15e5e;
+            }
+
+                .modal-confirm .icon-box i {
+                    color: #f15e5e;
+                    font-size: 46px;
+                    display: inline-block;
+                    margin-top: 13px;
+                }
+
+            .modal-confirm .btn, .modal-confirm .btn:active {
+                color: #fff;
+                border-radius: 4px;
+                background: #60c7c1;
+                text-decoration: none;
+                transition: all 0.4s;
+                line-height: normal;
+                min-width: 120px;
+                border: none;
+                min-height: 40px;
+                border-radius: 3px;
+                margin: 0 5px;
+            }
+
+            .modal-confirm .btn-secondary {
+                background: #c1c1c1;
+            }
+
+                .modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+                    background: #a8a8a8;
+                }
+
+            .modal-confirm .btn-danger {
+                background: #f15e5e;
+            }
+
+                .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+                    background: #ee3535;
+                }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
+}
+
+@section Customscripts{
+    <script>
+        $(document).ready(function () {
+
+
+            $('table .delete').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                $('#deleteSection #id').val(id);
+
+            });
+
+
+            $('table .update').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                $.ajax({
+
+                    type: 'GET',
+                    url: '/Admin/Dashboard/find/' + id,
+                    success: function (category) {
+
+                        $('#updateSection #id').val(category.id);
+                        $('#updateSection #name').val(category.name);
+                    }
+
+                })
+            });
+
+
+        });
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-start align-items-center ">
+        <h3 class="card-title"></h3>
+        <button class=" btn  bg-success" data-target="#addSection" data-toggle="modal">
+            <i class="fa fa-plus mr-1"> </i>
+            Add New Section
+        </button>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Name</th>
+                    <th>Number of Articles</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.categories)
+                {
+
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <span class="badge bg-warning">1</span>
+                        </td>
+                        <td>
+                            <button class=" btn badge bg-primary update" data-toggle="modal" data-target="#updateSection">
+                                Update
+                            </button>
+                            <button class=" btn badge bg-danger delete" data-toggle="modal" data-target="#deleteSection">
+                                Delete
+                            </button>
+                            <input type="hidden" value="@item.ID" class="id" />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Create Modal -->
+
+<div class=" modal fade" id="addSection">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddSectionLabel"> Add New Section </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form method="post" asp-controller="dashboard" asp-action="createSection">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gray-light" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" data-save="modal">Save</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Update Modal -->
+
+<div class=" modal fade" id="updateSection">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddSectionLabel"> Change Section Name </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form method="post" asp-controller="dashboard" asp-action="updateSection">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input type="text" id="name" name="name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger" value="Save Changes" />
+                    <input type="hidden" id="id" name="id" value="" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteSection" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <form method="post" asp-controller="dashboard" asp-action="deleteSection">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger " value="Delete" />
+                    <input type="hidden" id="id" name="id" value="" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

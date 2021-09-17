@@ -1,0 +1,25 @@
+﻿/* The Lay out*/
+.navCustom {
+    padding: 10px 20px;
+    background: #181817;
+    margin: 0 20px;
+
+}
+
+.burger-icon{
+    font-size:30px;
+    color:#F0A306;
+  
+        
+}
+.burger-icon-item {
+    float: left;
+    margin-left: 10px;
+}
+.nav-item a{
+    color: #A9A8A8;
+
+}
+.nav-item a:hover {
+    color: #F0A306;
+}

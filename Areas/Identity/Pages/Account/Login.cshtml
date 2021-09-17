@@ -1,0 +1,71 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = "~/Views/Shared/_CustomIdentityLayout.cshtml";
+    ViewData["Title"] = "Log in";
+}
+
+
+@*@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6" style="margin:auto;">
+            <div class="card " style=" border-radius: 25px;">
+                <div class="card-header" style=" background:#F0A306">
+                    <h3 class="card-title" style="margin:auto;color:#fff;">@ViewData["Title"]</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form class="form-horizontal" style="padding:20px" id="account" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <!-- /.card-body -->
+                    <div class="form-group" style="margin-top:30px;">
+                        <button type="submit" style="width:100%" ; class="btn btn-dark">Log in</button>
+                    </div>
+                    <!-- /.card-footer -->
+                    <div class="form-group">
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                        @*<p>
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            </p>
+                            <p>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </p>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

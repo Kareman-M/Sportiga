@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Write";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+}
+
+@model Sportiga.Models.Articles
+
+@section Customscripts{
+    <script>
+        var previewImg = function (e)
+        {
+            var result = document.getElementById("imgPreview");
+            result.src = URL.createObjectURL(e.target.files[0])
+        }
+        var InputFileClick = function ()
+        {
+            document.getElementById("imgFile").click();
+        }
+       
+    </script>
+}
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data" asp-controller="Articles" asp-action="AddArticle">
+
+                <div class="ccard-headerol-md-12">
+                    <div class="card card-outline card-info">
+                        <div class="card-header">
+                            <!-- tools box -->
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <!-- /. tools -->
+                        </div>
+                        <!-- /.card-header -->
+
+                        <div class="card-body pad">
+
+                            <div class="form-group ">
+                                <button class="mb-1" onclick="InputFileClick()">Add Image</button>
+                                <img id="imgPreview" style="width: 250px; height: 250px; display: block" />
+                                <input type="file" hidden id="imgFile" name="imgFile" onclick="previewImg(event)" required />
+                            </div>
+                            <div class="form-group ">
+                                <label>Writer Name</label>
+                                <input type="text" disabled value="@ViewBag.User.FullName" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/>
+                                <input type="hidden" asp-for="ApplicationUsersId" class="form-control" value="@ViewBag.User.Id" />
+                                <input type="hidden" asp-for="ApplicationUsers" class="form-control" value="@ViewBag.User" />
+                                <span asp-validation-for="ApplicationUsersId" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div>
+                                @{
+                                    if (ViewBag.Roles.Contains("Admin") || ViewBag.Roles.Contains("Desk"))
+                                    {
+                                        <input type="hidden" asp-for="Status" class="form-control" value="approved" />
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" asp-for="Status" class="form-control" value="append" />
+
+                                    }
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Date"></label>
+                                <input type="date" asp-for="Date" class="form-control" value="@DateTime.Now"
+                                       aria-label="Large" aria-describedby="inputGroup-sizing-sm" required />
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input type="text" asp-for="Title" class="form-control"
+                                       placeholder=" Enter The Title" aria-label="Large" aria-describedby="inputGroup-sizing-sm" required />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="categoryId">Section</label>
+                                <select class="form-control select2" asp-for="categoryId" style="width: 100%;">
+                                    @foreach (var item in ViewBag.categories)
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+
+                                    }
+                                </select>
+                                <span asp-validation-for="categoryId" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+
+                                <label asp-for="Topic"></label>
+                                <textarea asp-for="Topic" class="textarea" placeholder="Place some text here" required
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <span asp-validation-for="Topic" class="text-danger"></span>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-info ">Send</button>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+            </form>
+        </div>
+    </div>
+    <!-- ./row -->
+</section>
+<!-- /.content -->

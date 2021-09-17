@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewData["Title"] = "essay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section style {
+<style>
+    *{
+        padding:0;
+        margin:0;
+
+    }
+    article.content h1 {
+        float: right;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        font-size: 18px;
+        line-height: 32px;
+        font-size: 23px;
+        line-height: 40px;
+        text-align: right;
+    }
+    article.content .author {
+        float: right;
+        position: relative;
+        font-weight: 700;
+        color: rgb(240, 173, 78);
+        fill: rgb(240, 173, 78);
+    }
+    article.content .author a {
+        color: rgb(240, 173, 78);
+        fill: rgb(240, 173, 78);
+        font-size:16px;
+    }
+ 
+   
+    article.content .publish {
+        float: right;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+        article.content .publish .item {
+            line-height: 42px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 700;
+            color: #293144;
+            width: 100%;
+            text-align: right;
+        }
+    article.content i {
+        font-size: 20px;
+        color: rgb(240, 173, 78);
+    }
+    article.content .publish .item .icon {
+        fill: rgb(240, 173, 78);
+    }
+    article.content figure.main-img {
+        padding-bottom: 0 !important;
+        float: right;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        position: relative;
+        padding-bottom: 30px;
+        height:350px;
+    }
+        article.content figure.main-img::after {
+            content: "";
+            display: block;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+    figure {
+        text-align: center;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+    }
+    article.content figure.main-img img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        transition: all .34s ease-in-out;
+    }
+    figure img {
+        text-align: center;
+    }
+    article.cont figure.main-img figcaption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        font-size: 14px;
+        z-index: 33;
+        text-align: center;
+        background: rgba(255,255,255,.6);
+    }
+    .paragraph-list {
+        max-width: 100%;
+        overflow: hidden;
+        float: right;
+        width: 100%;
+        line-height: 1.8;
+    }
+    .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        padding: .75rem 1rem;
+        margin-bottom: 1rem;
+        list-style: none;
+        background-color: #e9ecef;
+        border-radius: 0;
+    }
+
+    .rtl .breadcrumb-item + .breadcrumb-item, [dir=rtl] .breadcrumb-item + .breadcrumb-item {
+        padding-right: .5rem;
+        padding-left: 0;
+        color: #6c757d;
+        content: "/";
+    }
+
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+
+    .rtl .breadcrumb-item + .breadcrumb-item::before, [dir=rtl] .breadcrumb-item + .breadcrumb-item::before {
+        padding-right: 0;
+        padding-left: .5rem;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        display: inline-block;
+        padding-right: .5rem;
+        color: #6c757d;
+        content: "/";
+    }
+
+
+</style>
+}
+<section class="essay">
+    <section class="cat-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" title="">الرئيسية</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> @ViewBag.category.Name</li>
+            </ol>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 right-col">
+                <div class="block news-article">
+                    <div class="title">
+                        <a href="/Home/Categories/@ViewBag.category.ID" title="@ViewBag.category.Name"><h2>@ViewBag.category.Name</h2></a>
+                    </div>
+                    <article class="content">
+                        <!-- Title -->
+                        <h1>@ViewBag.article.Title</h1>
+                        <!-- Author-->
+                        <div class="author" rel="author">
+                            <a href="/home/writer/@ViewBag.article.ApplicationUsersId" title="@ViewBag.username">
+                                <i class="fas fa-pen-square"></i>
+                                @ViewBag.username
+                            </a>
+                        </div>
+
+                        <!-- Time -->
+                        <div class="publish">
+                            <div class="item">
+                                <i class="fa fa-history"></i>
+                                <time style="font-size:16px">
+                                    @ViewBag.Date
+                                </time>
+                            </div>
+                        </div>
+
+                        <!-- Main Image -->
+
+                        <figure class="main-img">
+                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.article.Image"
+                                 sizes="100vw" alt="@ViewBag.article.Title">
+                            <figcaption class="brief">
+                                @ViewBag.article.Title
+                            </figcaption>
+                        </figure>
+
+                        <!-- Topic -->
+                        <
+                        <div class="paragraph-list">
+                            @Html.Raw(@ViewBag.article.Topic)
+
+
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+
+            <div class="col-4 left-col">
+                <div class="block ">
+                    <div class="title">
+                        <h2> ﺗﻔﻀﻴﻼﺕ اﻟﻘﺮاء</h2>
+                    </div>
+                    <div class="content">
+                        @foreach ( var item in ViewBag.prefired)
+                         {
+		 
+                        <div class="item-li  ">
+                            <a href="">
+                                <div class="content-img">
+                                    <img class=" lazyloaded" src="~/images/@item.Image" data-src="~/images/@item.Image" alt="@item.Title">
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                       @item.Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                         }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

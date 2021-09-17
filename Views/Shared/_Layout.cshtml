@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.css">
+    <!-- Layout Custome Style-->
+    <link rel="stylesheet" href="~/SiteCss/LayOutStyle.css">
+    <!-- Home Style -->
+    <link rel="stylesheet" href="~/SiteCss/Home.css">
+    @*<link rel="stylesheet" href="~/SiteCss/Home.scss">*@
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    @RenderSection("style")
+
+</head>
+<body>
+
+    <style>
+           .navbar {
+          padding:0rem;
+          margin-bottom:2rem;
+        }
+
+        .dropdown .dropdown-menu {
+          border-radius:0;
+         }
+        .navbar-nav{
+            overflow:hidden;
+        }
+        /* Medium devices (tablets, 768px and up)
+        The navbar toggle appears at this breakpoint */
+        @@media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+
+    <header>
+
+        <div class="navbar-brand ml-3" style="margin:30px; width:100%">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-4">
+                        <h2 style="text-align:right;font-size: 42px;">سبورتيجا</h2>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4" style="">
+                        <ul style="list-style:none;width: 100%;display:flex;justify-content: end;position: absolute;top: -37px;left: 0;" class="social">
+                            <li style="width: 13%; font-size: 30px; color:blue;">
+                                <i class="fab fa-facebook"></i>
+                            </li>
+                            <li style="width: 13%; font-size: 30px; color:red">
+                                <i class="fab fa-youtube"></i>
+                            </li>
+                            <li style="width: 13%; font-size: 30px; color:#74c0fc">
+                                <i class="fab fa-twitter"></i>
+                            </li>
+                            <li style="width: 13%; font-size: 30px; color:orange">
+                                <i class="  fa fa-rss-square"></i>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+            <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
+            <div class="navbar-toggler-right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+
+
+
+            <div class="collapse navbar-collapse flex-column " id="navbar" style="border: 1.3 solid #F0A306">
+
+                <ul class="navbar-nav  w-106 justify-content-center px-3">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">الرئيسية<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">كرة مصرية<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">كرة عربية<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">كرة عالمية<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">نجوم كرة القدم<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">ميركاتو<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">رياضات أخرى<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">تقارير وحوارات<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">أقلام حرة<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">تحقيقات صحفية<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">سبورتيجا لايت<span class="sr-only">(current)</span></a>
+                    </li>
+                  
+                    <li class="nav-item dropdown" style="font-size:25px">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">تقارير وحورات</a>
+                            <a class="dropdown-item" href="#">تحقيقات صحفية</a>
+                            <a class="dropdown-item" href="#">أقلام حرة</a>
+                            <a class="dropdown-item" href="#">فيديوهات</a>
+                            <a class="dropdown-item" href="#">سبورتيجا لايت</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+
+
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <section>
+
+        @RenderBody()
+    </section>
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/dist/js/demo.js"></script>
+    <!-- Home JS-->
+    <script src="~/SiteJS/Home.js"></script>
+    @RenderSection("script", required: false)
+</body>
+</html>
+
+
+

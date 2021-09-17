@@ -1,0 +1,609 @@
+*{
+    padding:0;
+    margin:0;
+    text-decoration:none;
+    outline:0;
+    box-sizing:border-box;
+    
+}
+html{
+     font-size:16px;
+    font-family:sans-serif,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","cabin";
+}
+.wrapper
+{
+    max-width:95%;
+    margin-left:auto;
+    margin-right:auto;
+}
+/********banner*****************/
+.banner{
+    background-image:url('../images/bg-01.jpg');
+    background-repeat:no-repeat;
+    background-position:center center;
+    max-height:100vh;
+    color:white;
+}
+.banner nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:20px 0 20px 0;
+}
+.banner nav ul{
+    list-style-type:none;
+    background-color:#1E9CAB;
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height:0;
+    overflow:hidden;
+    background-color:transparent;
+    
+    
+}
+.banner nav ul#drop-down li{
+    list-style-type:none;
+    
+}
+    .banner nav ul li a {
+        display: inline-block;
+        color: white;
+        padding: 10px;
+        
+        transition: all .8s ease;
+        border-radius: 10px;
+      
+    }
+       
+.banner .wrapper nav #drop{
+    display:none;
+}
+.banner .wrapper nav #drop:checked~ul{
+    max-height:100%;
+    transition:.8s all ease;
+   
+   
+}
+.banner .wrapper nav label i.fas.fa-bars{
+    font-size:30px;
+     cursor:pointer;
+}
+.banner header{
+    padding: 10% 0 10% 0;
+}
+.banner header p{
+    text-align:center;
+}
+.banner header h1{
+    text-align:center;
+    font-size:20px;
+    padding: 10px 0 10px 0;
+}
+.banner header button{
+    width: 100%;
+   border: 1px solid white;
+   background-color: transparent;
+   color: white;
+   margin-top:20px;
+   padding:10px 0 10px 0;
+}
+/************content*************/
+.content{
+    background-color:#3333331c;
+    }
+.content .wrapper div{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content: space-around;
+}
+.content .wrapper div article{
+    width:45%;
+    background-color:white;
+    margin:20px 0 20px 0;
+    padding:20px;
+}
+.content .wrapper div article p{
+    color:grey;
+    font-size:10px;
+    padding:20px;
+}
+
+.content .wrapper div article h1{
+    font-size: 12px;
+    white-space:nowrap;
+    font-weight:bolder;
+    text-align:center;
+    padding-top:20px;
+}
+/************products************/
+.products .wrapper{
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+}
+.products .wrapper div{
+    display:flex;
+    flex-direction:column;
+}
+.products .wrapper div article{
+   padding:10px;
+   line-height:30px;
+}
+.products .wrapper div article img{
+   max-width:100%;
+   height:auto;
+   box-shadow: 2px 2px 3px #1E9CAB,
+               -2px -2px 3px #1E9CAB;
+}
+.products .wrapper div article a{
+    display:inline-block;
+    margin-top:20px;
+   color:#1E9CAB;
+   border: 1px solid #1E9CAB;
+   padding: 10px;
+    border-radius: 20px;
+   
+    
+}
+    .products .wrapper div article a:hover {
+        backgorund-color: #3333331c;
+        border: 1px solid white;
+    }
+.products .wrapper article h1{
+    text-align:center;
+    padding:20px 0 20px 0;
+    white-space:nowrap;
+}
+.products .wrapper article>p{
+    line-height:20px;
+    text-align:center;
+}
+/************brand****************/
+.brand{
+    background-color:#3333331c;
+    padding:10px;
+}
+.brand img{
+    max-width:15%;
+}
+.brand .wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+/*****************review**************/
+.review{
+    padding:20px;
+}
+.review .wrapper h1{
+    text-align:center;
+}
+.review .wrapper p{
+    line-height:25px;
+    text-align:justify;
+    margin:10px 0 10px 0;
+}
+/***********levels***********/
+.levels{
+    background-color:#E8E8E8;
+    padding:30px;
+}
+.levels .wrapper{
+    display:flex;
+    flex-direction:column;
+}
+.levels .wrapper article{
+    background-color: white;
+    padding: 20px;
+    margin-bottom:20px;
+    line-height:25px;
+    text-align:center;
+}
+.circle {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    border: 1px dotted grey;
+    margin: 20px auto;
+    text-align: center;
+}
+.levels .wrapper article h5{
+   text-align:center;
+}
+.levels .wrapper article p{
+    text-align:center;
+}
+.levels .wrapper article h5:not(.levels .wrapper article h5:last-of-type){border-bottom:1px dotted grey;}
+.levels .wrapper article button{
+    width: 100%;
+    border: none;
+    padding: 10px;
+    color: currentColor;
+    margin-top:20px;
+}
+.levels .wrapper article h1{
+   text-align:center;
+}
+/***********clients*****************/
+.clients{
+    padding:20px;
+}
+.clients .wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.clients .wrapper article{
+    padding:20px;
+}
+.clients .wrapper article:first-of-type h1{
+    padding:20px;
+    text-align:center;
+}
+.clients .wrapper article:first-of-type p{
+   color:grey;
+}
+.clients .wrapper article div img{
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.levels .wrapper article p,.levels .wrapper article h5 {
+    color:#ACA9AF;
+}
+.levels .wrapper article h5{padding:10px;}
+.levels article{
+    outline: 1px solid #E8E8E8;
+}
+/********showcases****************/
+.showcase {
+    background-color: #E8E8E8;
+    padding: 30px;
+}
+.showcase .wrapper{
+    display: flex;
+    flex-direction: column;
+    line-height: 25px;
+}
+.showcase .wrapper article:first-of-type{
+    padding-bottom:20px;
+}
+.showcase .wrapper article:first-of-type h1{
+    text-align:center;
+    padding-bottom:20px;
+}
+.showcase .wrapper article:first-of-type p{
+    color:grey;
+}
+.showcase .wrapper article:nth-of-type(2) div img{
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.showcase .wrapper article:nth-of-type(2) div p{
+    position: absolute;
+    color: white;
+    top: 70%;
+    white-space: normal;
+    left:10%;
+}
+.showcase .wrapper article:nth-of-type(2) div h1{
+     position: absolute;
+    color: white;
+    top: 50%;
+    white-space: normal;
+    left:20%;
+}
+/************footer*****************/
+footer{
+    background-image:url('../images/bg-02.jpg');
+    background-repeat:no-repeat;
+    background-position:center center;
+    padding:30px;
+}
+footer .wrapper{display:flex;flex-direction:row;flex-wrap: wrap;justify-content: space-around;}
+footer ul{
+    display:flex;
+    flex-direction:column;
+}
+footer ul li{
+    list-style-type:none;
+    color:white;
+}
+footer ul li a{
+    color:white;
+    display:inline-block;
+    width:100%;
+}
+footer .wrapper form{
+    width:100%;
+}
+footer .wrapper form div{
+    margin:10px;
+}
+footer .wrapper form div input{
+    width: 100%;
+    height: 30px;
+    padding:10px;
+    background-color:rgba(0,0,0,.5);
+    border:1px solid transparent;
+    color:#7D7C81;
+   
+}
+footer .wrapper form div textarea{
+    width: 100%;
+    padding:10px;
+    background-color:rgba(0,0,0,.5);
+    border:1px solid transparent;
+    color:#7D7C81;
+}
+footer .wrapper form div button{
+    width: 100%;
+    padding: 4px;
+    color:white;
+    background-color:#1E9CAB;
+    border:none;
+}
+footer .wrapper form h1 {
+    color: white;
+    margin: 10px;
+}
+     
+/****mediam device*****/
+@media (min-width: 768px) {  
+    .wrapper {
+        max-width: 720px;
+    }
+    .levels .wrapper{
+    display:flex;
+    flex-direction:row;}
+    /***********clients******************/
+    .clients{
+        padding:0;
+    }
+    .clients .wrapper{
+    display: flex;
+    flex-direction:row;
+}
+.clients .wrapper article:first-of-type {
+    padding-top:40px;
+    
+}
+.clients .wrapper article:first-of-type h1 {
+    padding:0;
+    text-align:left;
+    margin-bottom:20px;
+    
+}
+.clients .wrapper article {
+    padding: 0;
+}
+/***************showcase***********/
+.showcase .wrapper article:nth-of-type(2){
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+.showcase .wrapper article:nth-of-type(2) div{
+    width:32%;
+}
+.showcase .wrapper article:nth-of-type(2) div h1,.showcase .wrapper article:nth-of-type(2) div p {
+   
+    left: 5%;
+}
+.showcase .wrapper article:nth-of-type(2) div h1{
+    top:56%;
+}
+.showcase .wrapper article:first-of-type h1 {
+    text-align:left;
+   
+}
+/******footer***********/
+footer .wrapper{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    padding:30px;
+}
+footer .wrapper form{
+    width:40%;
+}
+footer .wrapper form h1{
+    color:white;
+    margin:10px;
+}
+footer .wrapper form div button{
+    width: 40%;
+    padding: 10px;
+    font-weight:bolder;
+}
+footer .wrapper article ul li{
+    padding:10px;
+}
+footer div h6{
+    font-weight: lighter;
+    font-size: 15px;
+}
+footer .wrapper form div input{
+    height: 40px;
+}
+   
+/*****show customer************/
+   .circle{
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    border: 1px dotted grey;
+    margin: 20px auto;
+    text-align:center;
+    }
+    .content .wrapper div article {
+    width: 45%;
+    background-color: white;
+    margin:0;
+}
+.content .wrapper div article:nth-child(3),.content .wrapper div article:nth-child(6) {
+   border-right:0;
+}
+
+}
+    
+/****desktop screen*******/
+
+@media(min-width:992px){
+    .wrapper{
+        max-width:960px;
+        }
+        /*****banner***********/
+        .banner{
+            max-height:100vh;
+            padding-bottom:40px;
+        }
+    .banner .wrapper nav label i.fas.fa-bars{
+     max-height: 0;
+     overflow: hidden;
+}
+.banner nav ul {
+    flex-direction: row;
+   justify-content: flex-end;
+   max-height:100vh;
+}
+.banner nav {
+    flex-direction: row;
+   flex-wrap: nowrap;
+}
+.banner nav ul  li{
+    width: 120px;
+   text-align: center;
+}
+header{
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+}
+.banner header h1 {
+    font-size:xxx-large;
+}
+.banner header p {
+    text-align: left;
+}
+.banner header button {
+    width:20%;
+}
+/**********content our prouduct***/
+.content{
+    padding:40px;
+}
+.content .wrapper{
+    padding:10px 0 10px 0;
+}
+.content .wrapper div{
+    display: flex;
+    flex-wrap: wrap;
+    background-color:white;
+    justify-content: center;
+    
+}
+.content .wrapper div article{
+    max-width:30%;
+     border-right:1px solid #3333331c;
+    padding:30px;
+    background-color:white;
+    display: flex;
+   flex-direction: column;
+   align-items: baseline;
+    
+    
+}
+
+.content .wrapper div article:not(.separator){
+   
+    border-bottom:1px solid #3333331c;
+    
+}
+
+.content .wrapper div article p{
+   color:#999;
+   font-size:20px;
+   text-align:start;
+   padding-left:0;
+}
+
+
+.content .wrapper div article h1{
+    font-size: 24px;
+    text-align:start;
+    
+}
+/*******products*************/
+.products .wrapper div {
+    display: flex;
+    flex-direction:row;
+}
+.products .wrapper div article img
+{
+    box-shadow:none;
+}
+.products .wrapper article p {
+    text-align:start;
+    color:grey;
+}
+.products .wrapper article h1{
+    padding:20px 0 10px 0;
+    text-align:start;
+}
+.products .wrapper article:first-of-type{padding:10px;}
+.products .wrapper div article a {
+    display: inline-block;
+    margin-top: 20px;
+    color: black;
+    border:none;
+    padding:0;
+    border-radius: 20px;
+}
+/************brand***************/
+.brand{
+padding:40px;
+}
+/*************review**********************/
+.review .wrapper h1{
+    text-align:left;
+}
+.review .wrapper p{
+    padding:10px;
+}
+.review .wrapper div:last-of-type {
+      padding:10px;
+      
+}
+.review .wrapper div:last-of-type h5
+{
+    color: grey;
+    font-weight: 900;
+    padding:10px 0 10px 0;
+}
+.review .wrapper div h5:last-child {
+      padding:10px;
+      margin:0;
+     padding:10px 0 10px 0;
+     color: #80808096;
+}
+/***********levels****************/
+.levels{
+   padding:50px;
+}
+.levels .wrapper article{
+    border:1px solid white;
+}
+.levels .wrapper article:nth-child(2){
+    transform:scale(1,1.2);
+}
+.levels .wrapper article button {
+    width: auto;
+}
+
+
+}

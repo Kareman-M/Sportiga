@@ -1,0 +1,470 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section style{
+<style>
+   
+</style>
+}
+@section script{
+    <script>
+       
+        $(document).ready(function () {
+            $(window).on('load', function () {
+            
+                document.querySelectorAll("#custCarousel .carousel-inner .carousel-item")[0].classList.add("active");
+                document.querySelectorAll("#custCarousel .carousel-indicators .list-inline-item")[0].classList.add("active");
+       
+        });
+
+    })
+    </script>
+}
+<section class="FirstSider">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+                    <!-- slides -->
+                    <div class="carousel-inner">
+                        @foreach (var item in ViewBag.lastArticles)
+                        {
+                            <div class="carousel-item ">
+                                <img src="~/images/@item.Image" alt="Hills">
+                                <div class="carousel-caption caption-custom">
+                                    <a href="/Home/essay/@item.ID">
+                                    <h3 >
+                                        @item.Title
+                                    </h3>
+                                    </a>
+                                </div>
+                            </div>
+
+                        }
+                    </div> <!-- Left right -->
+                    <ol class="carousel-indicators list-inline">
+                        @{ var i = 0;
+                            foreach (var item in ViewBag.lastArticles)
+                            {
+                                <li class="list-inline-item ">
+                                    <a  id="carousel-selector-@i" class="selected" data-slide-to="@i" data-target="#custCarousel">
+                                        <img src="~/images//@item.Image" class="img-fluid">
+                                    </a>
+                                </li>
+
+                                i = i + 1;
+                            }
+                        }
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+
+        </div>
+    </div>
+
+
+
+</section>
+
+<section class="elmogz">
+</section>
+
+<section class="FirstSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 ">
+                <div class="block">
+
+                    <div class="title">
+                        <a href="/Home/Categories/1" title="كرة مصرية">
+                            <h2> كرة مصرية </h2>
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <div class="item-card">
+                            <a href="/Home/Essay/@ViewBag.KoraMsrya[0].ID">
+                                <div class="content-img">
+                                    <img src="~/images/@ViewBag.KoraMsrya[0].Image" width="450" height="253" />
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @ViewBag.KoraMsrya[0].Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="item-card">
+                                    <a href="/Home/Essay/@ViewBag.KoraMsrya[1].ID">
+                                        <div class="content-img ss">
+                                            <img src="~/images/@ViewBag.KoraMsrya[1].Image" width="213" height="119" />
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraMsrya[1].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="item-card">
+                                    <a href="/Home/Essay/@ViewBag.KoraMsrya[2].ID">
+                                        <div class="content-img ss">
+                                            <img src="~/images/@ViewBag.KoraMsrya[2].Image" width="213" height="119" />
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraMsrya[2].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <a href="/Home/Categories/1" class="more" title="كرة مصرية">المزيد</a>
+                    </div>
+                </div><!--./block-->
+            </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="block">
+
+                    <div class="title">
+                        <a href="/Home/Categories/2" title="كرة عربية ">
+                            <h2> كرة عربية </h2>
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <div class="item-card">
+                            <a href="/Home/Essay/@ViewBag.KoraArabya[0].ID">
+                                <div class="content-img">
+                                    <img src="~/images/@ViewBag.KoraArabya[0].Image" width="450" height="253" />
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @ViewBag.KoraArabya[0].Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="item-card">
+                                    <a href="/Home/Essay/@ViewBag.KoraArabya[1].ID">
+                                        <div class="content-img ss">
+                                            <img src="~/images/@ViewBag.KoraArabya[1].Image" width="213" height="119" />
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraArabya[1].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="item-card">
+                                    <a href="/Home/Essay/@ViewBag.KoraArabya[2].ID">
+                                        <div class="content-img ss">
+                                            <img src="~/images/@ViewBag.KoraArabya[2].Image" width="213" height="119" />
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraArabya[2].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <a  href="/Home/Categories/2" title="كرة عربية " class="more" >المزيد</a>
+                    </div>
+                </div><!--./block-->
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="secondSection">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="block ">
+                    <div class="title">
+                        <a href="/Home/Categories/3" title="كرة عالمية">
+                            <h2> كرة عالمية </h2>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="item-card">
+                            <a href="/Home/Essay/@ViewBag.KoraAlamia[0].ID">
+                                <div class="content-img">
+                                    <img class=" lazyloaded" src="~/images/@ViewBag.KoraAlamia[0].Image" width="740" height="416" alt="">
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @ViewBag.KoraAlamia[0].Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.KoraAlamia[1].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.KoraAlamia[1].Image" data-src="~/images/@ViewBag.KoraAlamia[1].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraAlamia[1].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.KoraAlamia[2].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.KoraAlamia[2].Image" data-src="~/images/@ViewBag.KoraAlamia[2].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraAlamia[2].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.KoraAlamia[3].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.KoraAlamia[3].Image" data-src="~/images/@ViewBag.KoraAlamia[3].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.KoraAlamia[3].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <a href="/Home/Categories/3" title="كرة عالمية">المزيد</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="block ">
+                    <div class="title">
+                        <a href="/Home/Categories/1002" title="نجوم كرة القدم">
+                            <h2> نجوم كرة القدم </h2>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="item-card">
+                            <a href="/Home/Essay/@ViewBag.NgomElkora[0].ID">
+                                <div class="content-img">
+                                    <img class=" lazyloaded" src="~/images/@ViewBag.NgomElkora[0].Image" width="740" height="416" alt="">
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @ViewBag.NgomElkora[0].Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.NgomElkora[1].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.NgomElkora[1].Image" data-src="~/images/@ViewBag.NgomElkora[1].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.NgomElkora[1].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.NgomElkora[2].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.NgomElkora[2].Image" data-src="~/images/@ViewBag.NgomElkora[1].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.NgomElkora[2].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.NgomElkora[3].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.NgomElkora[3].Image" data-src="~/images/@ViewBag.NgomElkora[1].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.NgomElkora[3].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <a href="/Home/Categories/1002" title="نجوم كرة القدم">المزيد</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="block ">
+                    <div class="title">
+                        <a href="/Home/Categories/1003" title="ميركاتو  ">
+                            <h2> ميركاتو </h2>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="item-card">
+                            <a href="/Home/Essay/@ViewBag.Merkato[0].ID">
+                                <div class="content-img">
+                                    <img class=" lazyloaded" src="~/images/@ViewBag.Merkato[0].Image" width="740" height="416" alt="">
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @ViewBag.Merkato[0].Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.Merkato[1].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.Merkato[1].Image" data-src="~/images/@ViewBag.Merkato[1].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.Merkato[1].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.Merkato[2].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.Merkato[2].Image" data-src="~/images/@ViewBag.Merkato[2].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.Merkato[2].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="item-li  ">
+                                    <a href="/Home/Essay/@ViewBag.Merkato[3].ID" title="">
+                                        <div class="content-img">
+                                            <img class=" ls-is-cached lazyloaded" src="~/images/@ViewBag.Merkato[3].Image" data-src="~/images/@ViewBag.Merkato[3].Image" alt="">
+                                        </div>
+                                        <div class="content-text">
+                                            <h3>
+                                                @ViewBag.Merkato[3].Title
+                                            </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <a href="/Home/Categories/1003" title="ميركاتو">المزيد</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="thirdSection">
+    <div class="container">
+        <div class="block ">
+            <div class="title">
+                <a href="/home/categories/1004" title="رياضات أخري ">
+                    <h2> رياضات أخري </h2>
+                </a>
+            </div>
+            <div class="content">
+                <div class="row">
+                    @foreach (  var item in ViewBag.OtherSports)
+	                 {
+		 
+                    <div class="col-12 col-sm-6 col-md-4 ">
+                        <div class="item-card   ">
+                            <a href="/Home/essay/@item.ID">
+                                <div class="content-img">
+                                    <img class=" ls-is-cached lazyloaded" src="~/images/@item.Image" data-src="~/images/@item.Image" width="740" height="416" alt="">
+                                </div>
+                                <div class="content-text">
+                                    <h3>
+                                        @item.Title
+                                    </h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+	                
+                    }
+                   
+                </div>
+            </div>
+            <div class="foot">
+                <a href="/home/categories/1004" class="more" title="رياضات أخري">المزيد</a>
+            </div>
+        </div>
+    </div>
+</section>

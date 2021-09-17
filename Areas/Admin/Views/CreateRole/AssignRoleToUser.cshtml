@@ -1,0 +1,152 @@
+﻿@model Sportiga.ViewModelComponant.UserRoleModel;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+
+@section Customscripts{
+    <script>
+        $(document).ready(function () {
+
+
+            $('.table .AddRole').on('click', function () {
+
+                var UserName = $(this).parent().find('.UserName').val();
+                $('#AddRole #UserId').val(UserName);
+
+
+
+            });
+
+
+        });
+
+    </script>
+}
+<div class="card">
+    <div class="card-header d-flex justify-content-start align-items-center ">
+        <h3 class="card-title"></h3>
+        <button class=" btn  bg-success">
+
+            <i class="fa fa-plus mr-1"> </i>
+            <a href="/Identity/Account/register">
+                Add New User
+            </a>
+        </button>
+
+    </div>
+    @*/.card-header*@
+    <div class="card-body">
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var i = 1;
+                    foreach (var item in ViewBag.Users)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.FullName</td>
+                            <td>
+                                @item.Email
+                            </td>
+                            <td>
+                                @foreach (var user in ViewBag.UserRole)
+                                {
+                                    if (item.Id == user.UserId)
+                                    {
+                                        var roleId = user.RoleId;
+                                        foreach (var role in ViewBag.Roles)
+                                        {
+                                            if (role.Id == roleId)
+                                            {
+                                                <span style="text-transform:capitalize"> @role.Name <b>|</b> </span>
+                                            }
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <button class=" btn badge bg-warning AddRole" data-toggle="modal" data-target="#AddRole">
+                                    Add Role
+                                </button>
+                                <button class=" btn badge bg-primary update" data-toggle="modal" data-target="#updateUSer">
+                                    Update
+                                </button>
+                                <button class=" btn badge bg-danger delete" data-toggle="modal" data-target="#deleteUser">
+                                    Delete
+                                </button>
+                                <input type="hidden" value="@item.UserName" class="UserName" />
+                            </td>
+                        </tr>
+                        i = i + 1;
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    @*/.card-body*@
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+<div class=" modal fade" id="AddRole">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddSectionLabel"> Assign Role To User </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form asp-action="SaveRole">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Username</label>
+                        <input type="text" id="UserId" name="UserId" value="" class="form-control" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Role Name</label>
+                        <select style="width:100%" asp-for="RoleId" asp-items="new SelectList(ViewBag.Roles)"></select>
+
+                        <span asp-validation-for="RoleId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gray-light" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>Add Role To User
+
+
+
