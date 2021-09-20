@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "View Article";
+
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <style>
+        a {
+            color: #fff;
+        }
+
+            a:hover {
+                color: #ccc;
+            }
+    </style>
+}
+@section Customscripts{
+    $('.nav.nav-pills li a').on('click', function () {
+    $('.nav.nav-pills  a.active').removeClass('active');
+    $(this).addClass('active');
+
+    });
+
+}
+<div style=" padding: 30px;margin: 20px;">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 style="text-align:right">@ViewBag.User.FullName</h3>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0" style="text-align:right">
+            <div class="mailbox-read-info">
+                <h3> @ViewBag.article.Title</h3>
+            </div>
+            <!-- /.mailbox-read-info -->
+            <div class="mailbox-controls with-border text-center">
+                <h3 style="text-align:right">@ViewBag.article.Date</h3>
+            </div>
+            <!-- /.mailbox-controls -->
+            <div class="mailbox-read-message">
+                @Html.Raw(@ViewBag.article.Topic)
+            </div>
+            <!-- /.mailbox-read-message -->
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            @{
+                if (@ViewBag.article.Status == "approved")
+                {
+                    ViewBag.ViewName = "approved Articles";
+                    <div class="float-right">
+                        <button type="button" class="btn btn-dark">
+                            <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
+                        </button>
+                        <button type="button" class="btn btn-dark">
+                            <a href="/admin/Articles/appendArticle/@ViewBag.article.ID">Append</a>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-danger">
+                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
+                    </button>
+
+                }
+                else if (@ViewBag.article.Status == "append")
+                {
+                    ViewBag.ViewName = "appended Articles";
+
+                    <div class="float-right">
+                        <button type="button" class="btn btn-success">
+                            <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                        </button>
+                    </div>
+
+                    <button type="button" class="btn btn-dark">
+                        <a href="/admin/Articles/appendArticle/@ViewBag.article.ID">Append</a>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
+                    </button>
+
+                }
+                else if (@ViewBag.article.Status == "append")
+                {
+                    ViewBag.ViewName = "rejected Articles";
+
+                    <div class="float-right">
+                        <button type="button" class="btn btn-success">
+                            <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-dark">
+                        <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
+                    </button>
+                }
+            }
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+</div>

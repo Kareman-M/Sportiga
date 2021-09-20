@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Sportiga.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    //[Authorize(Roles ="Admin")]
 
     public class Articles : Controller
     {
@@ -34,19 +34,36 @@ namespace Sportiga.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index(int id)
         {
-            ViewBag.articles = _Context.Articles.Where(d => d.categoryId == id && d.Status == "approved").Select(s => s).ToList();
+            try
+            {
+
+            ViewBag.articles = _Context.Articles.Where(d => d.categoryId == id && d.Status == "approved").OrderByDescending(s => s.Date);
+                ViewBag.categories = _Context.Categories;
             ViewBag.Users = _UserManagerr.Users.ToList();
             
             return View();
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
         [HttpGet]
         public async Task<IActionResult> Write()
         {
+            try
+            {
+
             ViewBag.categories = _Context.Categories;
            var user = await _UserManagerr.GetUserAsync(User);
             ViewBag.User = user;
             ViewBag.Roles = await _UserManagerr.GetRolesAsync(user);
             return View();
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
         }
 
 
@@ -54,18 +71,74 @@ namespace Sportiga.Areas.Admin.Controllers
         [Route("AddArticle")]
         public async Task<IActionResult> AddArticle(IFormFile imgFile,Models.Articles articles)
         {
+            try
+            {
+
             string imgtxt = Path.GetExtension(imgFile.FileName);
             var imgSave = Path.Combine(_IWeb.WebRootPath,"images", imgFile.FileName);
            var stream = new FileStream(imgSave, FileMode.Create);
             await imgFile.CopyToAsync(stream);
             articles.Image = imgFile.FileName;
             var _articles = _Context.Articles.Add(articles);
-            //    new Models.Articles { 
-                
-            //});
             _Context.SaveChanges();
             return RedirectToAction("Write");
+            }
+            catch (Exception e)
+            {
+                return Ok(e.Message);
+            }
 
+        }
+        [HttpGet]
+        public async Task<IActionResult> ViewArticle(int id)
+        {
+            var user = await _UserManagerr.GetUserAsync(User);
+            ViewBag.User = user;
+            ViewBag.Roles = await _UserManagerr.GetRolesAsync(user);
+            ViewBag.article = _Context.Articles.Find(id);
+            return View();
+        }
+        public IActionResult DeleteArticle(int id)
+        {
+            var article = _Context.Articles.Find(id);
+            var catID = article.categoryId;
+            _Context.Remove(article);
+            _Context.SaveChanges();
+            return RedirectToAction("Index","Articles", catID);
+        }
+        public IActionResult RejectedArticles()
+        {
+            ViewBag.Users = _UserManagerr.Users.ToList();
+            ViewBag.articles = _Context.Articles.Where(s => s.Status == "reject").OrderByDescending(s => s.Date);
+            return View();
+        }
+        public IActionResult AppendedArticles()
+        {
+            ViewBag.Users = _UserManagerr.Users.ToList();
+            ViewBag.articles = _Context.Articles.Where(s => s.Status == "append").OrderByDescending(s=> s.Date);
+            return View();
+        }
+        public IActionResult rejectArticle(int id)
+        {
+            var article = _Context.Articles.Find(id);
+            article.Status = "reject";
+            _Context.SaveChanges();
+            return RedirectToAction("RejectedArticles");
+        }
+        public IActionResult appendArticle(int id)
+        {
+            var article = _Context.Articles.Find(id);
+            article.Status = "append";
+            _Context.SaveChanges();
+            return RedirectToAction("AppendedArticles");
+        }
+        
+        public IActionResult approveArticle(int id)
+        {
+            var article = _Context.Articles.Find(id);
+            article.Status = "approved";
+            _Context.SaveChanges();
+            return RedirectToAction("Index", new { id = article.categoryId });
         }
     }
 }

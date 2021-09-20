@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sportiga.Areas.Admin.Hubs;
 using Sportiga.Data;
 using Sportiga.Models;
 using System;
@@ -39,6 +40,8 @@ namespace Sportiga
                            .AddEntityFrameworkStores<ApplicationDbContext>()
                            .AddDefaultTokenProviders();
             services.AddControllersWithViews();
+
+            services.AddSignalR();
 
             services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>()
                 .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>()
@@ -80,9 +83,9 @@ namespace Sportiga
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<Notification>("/Notification");
                 endpoints.MapControllerRoute(
                   name: "myareas",
 

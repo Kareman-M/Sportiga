@@ -1,3 +1,7 @@
-﻿@{
+﻿@inject ApplicationDbContext _Context;
+@inject UserManager<ApplicationUser> _UserManager;
+
+@{
     Layout = "_Layout";
+    ViewBag.Context = _Context;
 }

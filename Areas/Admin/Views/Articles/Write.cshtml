@@ -9,19 +9,18 @@
 
 @section Customscripts{
     <script>
-        var previewImg = function (e)
-        {
+        var previewImg = function (e) {
             var result = document.getElementById("imgPreview");
             result.src = URL.createObjectURL(e.target.files[0])
         }
-        var InputFileClick = function ()
-        {
+        var InputFileClick = function () {
             document.getElementById("imgFile").click();
         }
-       
+
     </script>
 }
-<!-- Main content -->
+@section Styles{ }
+    <!-- Main content -->
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -54,7 +53,7 @@
                             </div>
                             <div class="form-group ">
                                 <label>Writer Name</label>
-                                <input type="text" disabled value="@ViewBag.User.FullName" aria-label="Large" aria-describedby="inputGroup-sizing-sm"/>
+                                <input type="text" disabled value="@ViewBag.User.FullName" aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
                                 <input type="hidden" asp-for="ApplicationUsersId" class="form-control" value="@ViewBag.User.Id" />
                                 <input type="hidden" asp-for="ApplicationUsers" class="form-control" value="@ViewBag.User" />
                                 <span asp-validation-for="ApplicationUsersId" class="text-danger"></span>
@@ -111,7 +110,7 @@
 
                             </div>
 
-                            <button type="submit" class="btn btn-info ">Send</button>
+                            <button type="submit" class="btn btn-info " id="SendNotification">Send</button>
 
                         </div>
                     </div>

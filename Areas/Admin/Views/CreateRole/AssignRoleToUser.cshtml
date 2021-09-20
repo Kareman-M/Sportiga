@@ -1,8 +1,10 @@
 ﻿@model Sportiga.ViewModelComponant.UserRoleModel;
+@using Sportiga.Models;
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+  
 }
 
 @section Customscripts{
@@ -17,6 +19,29 @@
 
 
 
+            });
+
+            $('table .delete').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                    $('#deleteUser #id').val(id);
+               
+
+            });
+
+            $('table .update').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                $.ajax({
+
+                    type: 'GET',
+                    url: '/Admin/CreateRole/find/' + id,
+                    success: function (user) {
+                        $('#updateUSer #id').val(id);
+                        $('#updateUSer #FullName').val(user.FullName);
+                    }
+
+                })
             });
 
 
@@ -71,7 +96,14 @@
                                         {
                                             if (role.Id == roleId)
                                             {
-                                                <span style="text-transform:capitalize"> @role.Name <b>|</b> </span>
+
+                                                <p style="text-transform:capitalize">
+                                                    @role.Name
+                                                    <a href=@Url.Action("RemoveRole","CreateRole" , new {userid= @user.UserId , roleid=@role.Id})>
+                                                        <i class="fas  fa-trash-alt" style="color:red"></i>
+                                                    </a>
+                                                </p>
+
                                             }
                                         }
                                     }
@@ -88,6 +120,7 @@
                                     Delete
                                 </button>
                                 <input type="hidden" value="@item.UserName" class="UserName" />
+                                <input type="hidden" value="@item.Id" class="id" />
                             </td>
                         </tr>
                         i = i + 1;
@@ -149,4 +182,57 @@
 </div>Add Role To User
 
 
+<!-- Update Modal -->
 
+<div class=" modal fade" id="updateUSer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddSectionLabel"> Change User Name </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form method="post" asp-controller="CreateRole" asp-action="updateUSer">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="FullName"></label>
+                        <input type="text" id="FullName" name="FullName" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger" value="Save Changes" />
+                    <input type="hidden" id="id" name="id" value="" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteUser" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <form method="post" asp-controller="CreateRole" asp-action="deleteUser">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger " value="Delete" />
+                    <input type="hidden" id="id" name="id" value="" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

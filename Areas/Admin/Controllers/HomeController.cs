@@ -10,7 +10,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
-    //[Authorize("Roles=Admin")]
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: HomeController
