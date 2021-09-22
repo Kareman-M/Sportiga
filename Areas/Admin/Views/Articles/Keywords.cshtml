@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Keywords";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+
+@section Customscripts
+{
+    <script>
+        var keywords = [];
+        var delbtns;
+        document.getElementById('add').onclick = function() {
+            var keyword = document.getElementById('keyowrd').value;
+            var articleID = document.getElementById('articleID').value;
+            var obj = { Name: keyword, ArticlesId: articleID };
+            keywords.push(obj);
+            console.log(keywords);
+            document.getElementsByClassName("list-group")[0].innerHTML +=
+                `<li class="list-group-item ">${keyword}
+            <button class="btn btn-danger delete" 
+            style="position: absolute; left: 100%; top: 0%; height: 100%; font-size: 20px;">x</button>
+            </li>`;
+            keyword= "";
+
+            delbtns = $('.delete');
+            for (var i = 0; i < delbtns.length; i++) {
+
+                delbtns[i].onclick = function () {
+                    this.parentNode.remove();
+                    keywords.splice(i, 1);
+                
+                }
+            }
+        };
+            
+
+        
+        function call() {
+            $.ajax({
+                "type": "POST",
+                "url": '/Admin/Articles/AddKeywords/',
+                "dataType": "json",
+                "contentType": "application/json",
+                "data": JSON.stringify(keywords),
+            });
+        }
+       
+    </script>
+}
+@*<div>
+    <input id="keyowrd" type="text" />
+    <input id="articleID" value=@ViewBag.ArticleID  type="hidden" />
+    <button id="add">add</button>
+    <button id="save" onclick="call()"> save</button>
+</div>*@
+<div class="container" style="width:80%">
+    <input id="articleID" value=@ViewBag.ArticleID type="hidden" />
+    <div class="input-group mb-3" style="width:65%">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" id="add" type="button">Add</button>
+        </div>
+        <input id="keyowrd" style="height: 50px; text-align: right;" type="text" class="" placeholder="اضف الكلمة المفتاحيه" aria-label="Insert Keyword" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="keywordsList" style="width:62%">
+        <ul class="list-group">
+            
+           
+        </ul>
+    </div>
+    <div>
+        <button id="save" onclick="call()" class="btn btn-info" style="text-align:center;">Save</button>
+    </div>
+</div>

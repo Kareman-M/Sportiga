@@ -2,11 +2,12 @@
 @using Sportiga.Models;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Users";
     Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
-  
-}
 
+}
+<link href="~/plugins/paginig/paginig.css" rel="stylesheet" />
+<script src="~/plugins/paginig/paginig.js"></script>
 @section Customscripts{
     <script>
         $(document).ready(function () {
@@ -24,8 +25,8 @@
             $('table .delete').on('click', function () {
 
                 var id = $(this).parent().find('.id').val();
-                    $('#deleteUser #id').val(id);
-               
+                $('#deleteUser #id').val(id);
+
 
             });
 
@@ -44,6 +45,11 @@
                 })
             });
 
+            $(function () {
+
+                $('#tbldata').paging({ limit: 2});
+
+            })
 
         });
 
@@ -65,7 +71,7 @@
     <div class="card-body">
 
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="tbldata">
             <thead>
                 <tr>
                     <th style="width: 10px">#</th>
@@ -131,15 +137,7 @@
         </table>
     </div>
     @*/.card-body*@
-    <div class="card-footer clearfix">
-        <ul class="pagination pagination-sm m-0 float-right">
-            <li class="page-item"><a class="page-link" href="#">«</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">»</a></li>
-        </ul>
-    </div>
+
 </div>
 
 
@@ -179,7 +177,7 @@
         </div>
 
     </div>
-</div>Add Role To User
+</div>
 
 
 <!-- Update Modal -->

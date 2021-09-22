@@ -81,7 +81,7 @@ namespace Sportiga.Areas.Admin.Controllers
             articles.Image = imgFile.FileName;
             var _articles = _Context.Articles.Add(articles);
             _Context.SaveChanges();
-            return RedirectToAction("Write");
+                return RedirectToAction("Keywords", "Articles", new { id = articles.ID });
             }
             catch (Exception e)
             {
@@ -139,6 +139,25 @@ namespace Sportiga.Areas.Admin.Controllers
             article.Status = "approved";
             _Context.SaveChanges();
             return RedirectToAction("Index", new { id = article.categoryId });
+        }
+
+        public IActionResult Keywords(int id)
+        {
+            ViewBag.Article = _Context.Articles.Find(id);
+            ViewBag.ArticleID = id;
+            return View();
+        }
+
+        public IActionResult AddKeywords( [FromBody]List<Keywords> keywords)
+        {
+            var id = keywords[1].ArticlesId;
+            for(var i = 0; i<keywords.Count; i++)
+            {
+               // keywords[i].Articles = article;
+                _Context.Keywords.Add(keywords[i]);
+                _Context.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

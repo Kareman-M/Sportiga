@@ -2,32 +2,25 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
 }
-@section Customscripts{
-    $('.nav.nav-pills li a').on('click', function () {
-    $('.nav.nav-pills  a.active').removeClass('active');
-    $(this).addClass('active');
 
-    });
-
-}
 <section class="content">
 
     <!-- Default box -->
     <div class="card card-solid">
         <div class="card-body pb-0">
-            <div class="row d-flex align-items-stretch">
+            <div class="row d-flex align-items-stretch" id="t1">
 
                 @{ foreach (var item in ViewBag.articles)
                     {
-                        foreach(var cat in ViewBag.categories)
+                        foreach (var cat in ViewBag.categories)
                         {
-                            if(cat.ID == item.categoryId)
+                            if (cat.ID == item.categoryId)
                             {
 
-                               ViewData["Title"] = cat.Name;
+                                ViewData["Title"] = cat.Name;
                             }
                         }
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch item">
                             <div class="card bg-light">
                                 <div class="card-header text-muted border-bottom-0">
                                     @item.Date
@@ -49,7 +42,7 @@
 
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="~/images/@item.Image" alt="" class="img-circle img-fluid">
+                                            <img src="~/images/@item.Image" alt="" class="img-circle img-fluid" style="height: 150px; width: 150px;">
                                         </div>
                                     </div>
                                 </div>
@@ -68,22 +61,77 @@
             </div>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-            <nav aria-label="Contacts Page Navigation">
-                <ul class="pagination justify-content-center m-0">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- /.card-footer -->
+       
     </div>
     <!-- /.card -->
 
 </section>
+
+
+@section Customscripts{
+    <script>
+        /**
+ * Sets a CSS style on the selected element(s) with !important priority.
+ * This supports camelCased CSS style property names and calling with an object
+ * like the jQuery `css()` method.
+ * Unlike jQuery's css() this does NOT work as a getter.
+ *
+ * @@param {string|Object<string, string>} name
+ * @@param {string|undefined} value
+ */
+jQuery.fn.cssImportant = function(name, value) {
+  const $this = this;
+  const applyStyles = (n, v) => {
+    // Convert style name from camelCase to dashed-case.
+    const dashedName = n.replace(/(.)([A-Z])(.)/g, (str, m1, upper, m2) => {
+      return m1 + "-" + upper.toLowerCase() + m2;
+    });
+    // Loop over each element in the selector and set the styles.
+    $this.each(function(){
+      this.style.setProperty(dashedName, v, 'important');
+    });
+  };
+  // If called with the first parameter that is an object,
+  // Loop over the entries in the object and apply those styles.
+  if(jQuery.isPlainObject(name)){
+    for(const [n, v] of Object.entries(name)){
+       applyStyles(n, v);
+    }
+  } else {
+    // Otherwise called with style name and value.
+    applyStyles(name, value);
+  }
+  // This is required for making jQuery plugin calls chainable.
+  return $this;
+};
+
+        $(document).ready(function () {
+            $('#t1').after('<div id="nav" class="text-center"></div>');
+            var rowsShown = 10;
+            var rowsTotal = $('#t1 .item').length;
+            var numPages = rowsTotal / rowsShown;
+            for (i = 0; i < numPages; i++) {
+                var pageNum = i + 1;
+                $('#nav').append('<a href="#" class="btn-outline-info" rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
+            }
+            $('#t1 .item').cssImportant('display', 'none').hide();
+            $('#t1 .item').slice(0, rowsShown).cssImportant('display', 'block').show();
+            $('#nav a:first').addClass('active');
+            $('#nav a').bind('click', function (e) {
+                e.preventDefault();
+                $('#nav a').removeClass('active');
+                $(this).addClass('active');
+                var currPage = $(this).attr('rel');
+                var startItem = currPage * rowsShown;
+                var endItem = startItem + rowsShown;
+                //$('#t1 .item').attr('style', 'display:none !important')
+
+                $('#t1 .item').cssImportant('display', 'none').hide().slice(startItem, endItem).
+                    css('display', 'flex').animate({
+                        display: 'block'
+                    }, 300);
+            });
+        });
+    </script>
+
+}

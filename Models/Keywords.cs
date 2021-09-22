@@ -10,7 +10,6 @@ namespace Sportiga.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public virtual IEnumerable<Articles> Articles { get; set; }
 
         [ForeignKey("Articles")]
         public int ArticlesId { get; set; }

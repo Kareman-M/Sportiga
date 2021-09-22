@@ -25,8 +25,6 @@ namespace Sportiga.Models
         [ForeignKey("ApplicationUsers")]
         public string ApplicationUsersId { get; set; }
         public virtual IEnumerable<Keywords> Keywords { get; set; }
-        [ForeignKey("Keywords")]
-        public int KeywordsId { get; set; }
  
     }
 }
