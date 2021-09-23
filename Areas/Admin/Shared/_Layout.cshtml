@@ -5,12 +5,11 @@
     var rejectedAr = data.Articles.Where(s => s.Status == "reject").Count();
     var appendedAr = data.Articles.Where(s => s.Status == "append").Count();
     ClaimsPrincipal currentUser = this.User;
-    var user = "jhon Doe";
-    if (currentUser != null)
-    {
-        var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-        user = _UserManager.Users.Where(s => s.Id == currentUserName).FirstOrDefault().FullName;
-    }
+    var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+    var user = _UserManager.Users.Where(s => s.Id == currentUserName).FirstOrDefault();
+    var FullName = user.FullName;
+    var roles = await _UserManager.GetRolesAsync(user);
+
 }
 @model IEnumerable<Categories>
 <!DOCTYPE html>
@@ -73,12 +72,18 @@
                             <i class="fas fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">@user</span>
+                            <span class="dropdown-item dropdown-header">@FullName</span>
                             <div class="dropdown-divider"></div>
                             <input class="dropdown-item" style="width:100%" type="submit" value="Logout" />
                         </div>
                     </form>
 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/identity/changePassowrd/ChangePassowrdView" role="button">
+                        Change Passowrd
+                        <i class="fas fa-lock"></i>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
@@ -105,91 +110,96 @@
                         <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@user</a>
+                        <a href="#" class="d-block">@FullName</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
+                 
                     <ul class="nav nav-list nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="/admin/dashboard/index" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Widgets
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Calendar
-                                    <span class="badge badge-info right">2</span>
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-envelope"></i>
-                                <p>
-                                    Mailbox
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inbox</p>
-                                    </a>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-circle"></i>
-                                <p>
-                                    Adminstration
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-                                <li class="nav-item">
-                                    <a href="/Admin/CreateRole/AssignRoleToUser" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Users</p>
-                                    </a>
-                                </li>
+       with font-awesome or any other icon font library -->
+                        @if (roles.Contains("Admin"))
+                        {
 
 
-                                <li class="nav-item">
-                                    <a href="/Admin/CreateRole/Create" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
+                            <li class="nav-item has-treeview menu-open">
+                                <a href="/admin/dashboard/index" class="nav-link ">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/widgets.html" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Widgets
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="pages/calendar.html" class="nav-link">
+                                    <i class="nav-icon far fa-calendar-alt"></i>
+                                    <p>
+                                        Calendar
+                                        <span class="badge badge-info right">2</span>
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-envelope"></i>
+                                    <p>
+                                        Mailbox
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Inbox</p>
+                                        </a>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p>
+                                        Adminstration
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="/Admin/CreateRole/AssignRoleToUser" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Users</p>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="nav-item">
+                                        <a href="/Admin/CreateRole/Create" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Roles</p>
+                                        </a>
+                                    </li>
 
 
 
-                            </ul>
-                        </li>
-
+                                </ul>
+                            </li>
+                        }
 
                         <li class="nav-header">News</li>
 
@@ -201,82 +211,86 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/Admin/Articles/RejectedArticles" class="nav-link">
-                                <i class="nav-icon fa fa-eye-slash"></i>
-                                <p>
-                                    Rejected Article
-                                    <span class="badge badge-danger right">@rejectedAr</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/Admin/Articles/AppendedArticles" class="nav-link">
-                                <i class="nav-icon fa fa-thumbtack"></i>
-                                <p>
-                                    Appended Article
-                                    <span class="badge badge-info right">@appendedAr</span>
-                                </p>
-                            </a>
-                        </li>
+                        @if (roles.Contains("Admin") || roles.Contains("Desk"))
+                        {
+                            <li class="nav-item">
+                                <a href="/Admin/Articles/RejectedArticles" class="nav-link">
+                                    <i class="nav-icon fa fa-eye-slash"></i>
+                                    <p>
+                                        Rejected Article
+                                        <span class="badge badge-danger right">@rejectedAr</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Admin/Articles/AppendedArticles" class="nav-link">
+                                    <i class="nav-icon fa fa-thumbtack"></i>
+                                    <p>
+                                        Appended Article
+                                        <span class="badge badge-info right">@appendedAr</span>
+                                    </p>
+                                </a>
+                            </li>
+                        }
+                        @if (roles.Contains("Admin"))
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p>
+                                        Pages
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
 
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-circle"></i>
-                                <p>
-                                    Pages
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/Admin/Dashboard/Sections" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Sections</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Admin/Dashboard/SocialMedia" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Social Media</p>
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="/Admin/Dashboard/Sections" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Sections</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Admin/Dashboard/SocialMedia" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Social Media</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item has-treeview">
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-circle"></i>
-                                        <p>
-                                            Articles
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-
-
-                                        @foreach (var item in cat)
-                                        {
-
-                                            <li class="nav-item">
-                                                <a href="/admin/Articles/Index/@item.ID" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>@item.Name</p>
-                                                </a>
-                                            </li>
-                                        }
+                                    <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-circle"></i>
+                                            <p>
+                                                Articles
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
 
 
+                                            @foreach (var item in cat)
+                                            {
+
+                                                <li class="nav-item">
+                                                    <a href="/admin/Articles/Index/@item.ID" class="nav-link">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>@item.Name</p>
+                                                    </a>
+                                                </li>
+                                            }
 
 
 
 
 
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
 
 
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        }
 
 
 
@@ -383,7 +397,7 @@
         //    $('.nav.nav-pills li a').addClass(localStorage.ClassName);
         //}
     </script>
-    @RenderSection("Customscripts", required: false)
+    @RenderSection("Customscripts", required: false)lo
 </body>
 </html>
 

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace Sportiga.Areas.Identity.Pages.Account
 {
@@ -18,11 +19,15 @@ namespace Sportiga.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly ILogger<LogoutModel> _logger;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender, ILogger<LogoutModel> logger)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _logger = logger;
+
         }
 
         [BindProperty]
@@ -40,27 +45,18 @@ namespace Sportiga.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user != null )
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
+
+                   // var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var passowrdResetLink = Url.Action("ResetPassword", "Accont",
+                                           new { area = "Identity", email = Input.Email, token = user.Id }, Request.Scheme);
+                    _logger.Log(LogLevel.Warning, passowrdResetLink);
                     return RedirectToPage("./ForgotPasswordConfirmation");
+                    
                 }
-
-                // For more information on how to enable account confirmation and password reset please 
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Page(
-                    "/Account/ResetPassword",
-                    pageHandler: null,
-                    values: new { area = "Identity", code },
-                    protocol: Request.Scheme);
-
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                // Don't reveal that the user does not exist or is not confirmed
+                
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
@@ -68,3 +64,20 @@ namespace Sportiga.Areas.Identity.Pages.Account
         }
     }
 }
+
+// For more information on how to enable account confirmation and password reset please 
+// visit https://go.microsoft.com/fwlink/?LinkID=532713
+//var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+//code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+//var callbackUrl = Url.Page(
+//    "/Account/ResetPassword",
+//    pageHandler: null,
+//    values: new { area = "Identity", code },
+//    protocol: Request.Scheme);
+
+//await _emailSender.SendEmailAsync(
+//    Input.Email,
+//    "Reset Password",
+//    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+//return RedirectToPage("./ForgotPasswordConfirmation");

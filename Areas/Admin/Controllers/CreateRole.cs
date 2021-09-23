@@ -16,6 +16,8 @@ namespace WebApplication2.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+
     public class CreateRole : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

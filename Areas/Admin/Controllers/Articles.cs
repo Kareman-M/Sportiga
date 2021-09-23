@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 namespace Sportiga.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles ="Admin")]
 
     public class Articles : Controller
     {
@@ -30,7 +29,7 @@ namespace Sportiga.Areas.Admin.Controllers
             _UserManagerr = userManagerr;
             _IWeb = IWeb;
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult Index(int id)
         {
@@ -48,6 +47,7 @@ namespace Sportiga.Areas.Admin.Controllers
                 return Ok(e.Message);
             }
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Write()
         {
@@ -66,7 +66,7 @@ namespace Sportiga.Areas.Admin.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("AddArticle")]
         public async Task<IActionResult> AddArticle(IFormFile imgFile,Models.Articles articles)
@@ -89,6 +89,7 @@ namespace Sportiga.Areas.Admin.Controllers
             }
 
         }
+        [Authorize(Roles = "Admin , Desk")]
         [HttpGet]
         public async Task<IActionResult> ViewArticle(int id)
         {
@@ -98,6 +99,7 @@ namespace Sportiga.Areas.Admin.Controllers
             ViewBag.article = _Context.Articles.Find(id);
             return View();
         }
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult DeleteArticle(int id)
         {
             var article = _Context.Articles.Find(id);
@@ -106,18 +108,22 @@ namespace Sportiga.Areas.Admin.Controllers
             _Context.SaveChanges();
             return RedirectToAction("Index","Articles", catID);
         }
+
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult RejectedArticles()
         {
             ViewBag.Users = _UserManagerr.Users.ToList();
             ViewBag.articles = _Context.Articles.Where(s => s.Status == "reject").OrderByDescending(s => s.Date);
             return View();
         }
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult AppendedArticles()
         {
             ViewBag.Users = _UserManagerr.Users.ToList();
             ViewBag.articles = _Context.Articles.Where(s => s.Status == "append").OrderByDescending(s=> s.Date);
             return View();
         }
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult rejectArticle(int id)
         {
             var article = _Context.Articles.Find(id);
@@ -125,6 +131,7 @@ namespace Sportiga.Areas.Admin.Controllers
             _Context.SaveChanges();
             return RedirectToAction("RejectedArticles");
         }
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult appendArticle(int id)
         {
             var article = _Context.Articles.Find(id);
@@ -132,7 +139,7 @@ namespace Sportiga.Areas.Admin.Controllers
             _Context.SaveChanges();
             return RedirectToAction("AppendedArticles");
         }
-        
+        [Authorize(Roles = "Admin , Desk")]
         public IActionResult approveArticle(int id)
         {
             var article = _Context.Articles.Find(id);
@@ -140,7 +147,7 @@ namespace Sportiga.Areas.Admin.Controllers
             _Context.SaveChanges();
             return RedirectToAction("Index", new { id = article.categoryId });
         }
-
+        [Authorize]
         public IActionResult Keywords(int id)
         {
             ViewBag.Article = _Context.Articles.Find(id);
@@ -148,6 +155,7 @@ namespace Sportiga.Areas.Admin.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult AddKeywords( [FromBody]List<Keywords> keywords)
         {
             var id = keywords[1].ArticlesId;
@@ -157,7 +165,7 @@ namespace Sportiga.Areas.Admin.Controllers
                 _Context.Keywords.Add(keywords[i]);
                 _Context.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Write");
         }
     }
 }

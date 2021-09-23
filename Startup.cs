@@ -36,9 +36,12 @@ namespace Sportiga
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
                            .AddEntityFrameworkStores<ApplicationDbContext>()
                            .AddDefaultTokenProviders();
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+           opt.TokenLifespan = TimeSpan.FromHours(2));
             services.AddControllersWithViews();
 
             services.AddSignalR();
@@ -48,6 +51,11 @@ namespace Sportiga
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = $"/Identity/AccessDenied/Index";
+            });
 
             //services.ConfigureApplicationCookie(options =>
             //{
