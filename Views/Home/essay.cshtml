@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "essay";
+    ViewData["Title"] = @ViewBag.article.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section style {
@@ -106,9 +106,11 @@
     .paragraph-list {
         max-width: 100%;
         overflow: hidden;
-        float: right;
+        //float: right;
         width: 100%;
         line-height: 1.8;
+        BORDER-BOTTOM: 1PX SOLID #F0A306;
+        MARGIN-BOTTOM: 30PX;
     }
     .breadcrumb {
         display: flex;
@@ -143,8 +145,47 @@
         color: #6c757d;
         content: "/";
     }
-
-
+    .keywords {
+        width: 100%;
+        padding: 0 15px;
+        text-align: center;
+    }
+        .keywords a {
+            text-overflow: ellipsis;
+            white-space: pre-wrap;
+            display: inline-block;
+            background: 0 0;
+            border: 1px solid #dcdcdc;
+            margin: 5px;
+            padding: 3px 10px;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        .keywords .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            background: #EEE;
+            white-space: nowrap;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 1.42857;
+            border-radius: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #000;
+        }
+            .keywords .btn :hover {
+                background: #BBB;
+                color: #F0A306;
+                border: 1PX solid #000;
+            }
 </style>
 }
 <section class="essay">
@@ -195,14 +236,55 @@
                         </figure>
 
                         <!-- Topic -->
-                        <
+                        
                         <div class="paragraph-list">
                             @Html.Raw(@ViewBag.article.Topic)
 
 
                         </div>
+
+                        <!-- Keywords-->
+                        @if (ViewBag.Keywords != null)
+                         {
+
+                               <div class="keywords">
+                            @foreach (var item in ViewBag.Keywords)
+                            {
+                                <a class="btn btn-sm btn-primary" href="/keyword/@item.ID">@item.Name</a>
+                            }
+
+                        </div>
+                         }
                     </article>
+
                 </div>
+                    <!-- similer -->
+
+               @if(ViewBag.simelar != null)
+                {
+
+                <div class="block m">
+                    <div class="title"> <h2> مواد متعلقة </h2> </div>
+                    <div class="content">
+                        <div class="row">
+                            @foreach (var item in ViewBag.simelar)
+                            {
+
+                            <div class="col-sm-6">
+                                <div class="item-card">
+                                    <a href="/Home/Essay/@item.ID">
+                                        <div class="content-img"><img class=" lazyloaded" src="~/images/@item.Image" width="780" height="440" alt=""></div>
+                                        <div class="content-text">
+                                            <h3>@item.Title </h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
             </div>
 
 

@@ -36,31 +36,53 @@ namespace Sportiga.Controllers
             // Sections
             //FirstSection
             var KoreMasrya = new List<Models.Articles>();
-            KoreMasrya.AddRange(_Context.Articles.Where(s => s.categoryId == 1).OrderByDescending(s => s.Date).ToList().Take(3));
+            KoreMasrya.AddRange(_Context.Articles.Where(s => s.categoryId == 1 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(3));
             ViewBag.KoraMsrya = KoreMasrya;
             //
             var KoraArabya = new List<Models.Articles>();
-            KoraArabya.AddRange(_Context.Articles.Where(s => s.categoryId == 2).OrderByDescending(s => s.Date).ToList().Take(3));
+            KoraArabya.AddRange(_Context.Articles.Where(s => s.categoryId == 2 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(3));
             ViewBag.KoraArabya = KoraArabya;
             // SecondSection
             var KoraAlamia = new List<Models.Articles>();
-            KoraAlamia.AddRange(_Context.Articles.Where(s => s.categoryId == 3).OrderByDescending(s => s.Date).ToList().Take(4));
+            KoraAlamia.AddRange(_Context.Articles.Where(s => s.categoryId == 3 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
             ViewBag.KoraAlamia = KoraAlamia;
             //
             var NgomElkora = new List<Models.Articles>();
-            NgomElkora.AddRange(_Context.Articles.Where(s => s.categoryId == 1002).OrderByDescending(s => s.Date).ToList().Take(4));
+            NgomElkora.AddRange(_Context.Articles.Where(s => s.categoryId == 1002 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
             ViewBag.NgomElkora = NgomElkora;
             //
             var Merkato = new List<Models.Articles>();
-            Merkato.AddRange(_Context.Articles.Where(s => s.categoryId == 1003).OrderByDescending(s => s.Date).ToList().Take(4));
+            Merkato.AddRange(_Context.Articles.Where(s => s.categoryId == 1003 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
             ViewBag.Merkato = Merkato;
             //
             // ThirdSection
             var OtherSports = new List<Models.Articles>();
-            OtherSports.AddRange(_Context.Articles.Where(s => s.categoryId == 1004).OrderByDescending(s => s.Date).ToList().Take(6));
+            OtherSports.AddRange(_Context.Articles.Where(s => s.categoryId == 1004 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(6));
             ViewBag.OtherSports = OtherSports;
+            //
+            // FourththSection
+            var SportigaLite = new List<Models.Articles>();
+            SportigaLite.AddRange(_Context.Articles.Where(s => s.categoryId == 1009 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(5));
+            ViewBag.SportigaLite = SportigaLite;
 
-
+            //
+            // FifththSection
+            var TqarerAnd7warat = new List<Models.Articles>();
+            TqarerAnd7warat.AddRange(_Context.Articles.Where(s => s.categoryId == 1005 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
+            ViewBag.TqarerAnd7warat = TqarerAnd7warat;
+            //
+            var T7kikatSa7fia = new List<Models.Articles>();
+            T7kikatSa7fia.AddRange(_Context.Articles.Where(s => s.categoryId == 1006 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
+            ViewBag.T7kikatSa7fia = T7kikatSa7fia;
+            //
+            var Aklam7ora = new List<Models.Articles>();
+            Aklam7ora.AddRange(_Context.Articles.Where(s => s.categoryId == 1007 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
+            ViewBag.Aklam7ora = Aklam7ora;
+            //
+            // sixSection
+            var Videos = new List<Models.Articles>();
+            Videos.AddRange(_Context.Articles.Where(s => s.categoryId == 1007 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(6));
+            ViewBag.Videos = Videos;
             return View();
         }
 
@@ -79,10 +101,26 @@ namespace Sportiga.Controllers
         {
             var article = _Context.Articles.Find(id);
             ViewBag.article = article;
+            var keywords = _Context.Keywords.Where(k => k.ArticlesId == id);
+            if(keywords != null)
+            {
+                ViewBag.Keywords = keywords;
+            }
             ViewBag.category = _Context.Categories.Where(c => c.ID == article.categoryId).FirstOrDefault();
             ViewBag.username = _UserManagerr.Users.Where(u => u.Id == article.ApplicationUsersId).FirstOrDefault().FullName;
             ViewBag.Date = article.Date.ToString(" dddd dd / MMMM / yyyy - HH:mm", new CultureInfo("ar-AE"));
             ViewBag.prefired = _Context.Articles.Take(8);
+            List<Models.Articles> similer = new List<Models.Articles>();
+            var title = article.Title.Split(" ").ToArray();
+            foreach (var item in title)
+            {
+                if(item.Length >= 3)
+                {
+                    similer.Add(_Context.Articles.Where(s => s.Title.Contains(item)).FirstOrDefault());
+                }
+            }
+
+            ViewBag.simelar = similer.Count >= 4 ? similer.Take(4) : similer;
             return View();
         }
         
