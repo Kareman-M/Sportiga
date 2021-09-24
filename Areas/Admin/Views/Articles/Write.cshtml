@@ -13,9 +13,7 @@
             var result = document.getElementById("imgPreview");
             result.src = URL.createObjectURL(e.target.files[0])
         }
-        var InputFileClick = function () {
-            document.getElementById("imgFile").click();
-        }
+      
 
     </script>
 }
@@ -47,9 +45,8 @@
                         <div class="card-body pad">
 
                             <div class="form-group ">
-                                <button class="mb-1" onclick="InputFileClick()">Add Image</button>
+                                <input type="file"  id="imgFile" name="imgFile" onclick="previewImg(event)" required />
                                 <img id="imgPreview" style="width: 250px; height: 250px; display: block" />
-                                <input type="file" hidden id="imgFile" name="imgFile" onclick="previewImg(event)" required />
                             </div>
                             <div class="form-group ">
                                 <label>Writer Name</label>

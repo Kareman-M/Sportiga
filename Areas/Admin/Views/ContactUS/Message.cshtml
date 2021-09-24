@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Message";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+
+<div style="width:90%; margin:auto; text-align:right; ">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 style="text-align:right;">@ViewBag.Message.Name</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <div class="mailbox-read-info">
+                <h2>@ViewBag.Message.Subject</h2>
+                <h6>
+                    @ViewBag.Message.Email
+                </h6>
+            </div>
+            <!-- /.mailbox-read-info -->
+            
+            <!-- /.mailbox-controls -->
+            <div class="mailbox-read-message">
+                @ViewBag.Message.Message
+            </div>
+            <!-- /.mailbox-read-message -->
+        </div>
+        <!-- /.card-body -->
+
+    </div>
+    <!-- /.card -->
+</div>
+

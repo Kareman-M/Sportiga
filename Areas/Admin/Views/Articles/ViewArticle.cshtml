@@ -16,17 +16,7 @@
     </style>
 }
 @section Customscripts{
-    $('.nav.nav-pills li a').on('click', function () {
-    $('.nav.nav-pills  a.active').removeClass('active');
-    $(this).addClass('active');
-
-    });
-
-    $(function () {
-
-    $('#tbldata').paging({ limit: 10 });
-
-    })
+ 
 }
 <div style=" padding: 30px;margin: 20px;">
     <div class="card card-primary card-outline">
@@ -48,64 +38,74 @@
                 @Html.Raw(@ViewBag.article.Topic)
             </div>
             <!-- /.mailbox-read-message -->
-        </div>
-        <!-- /.card-body -->
 
-        <div class="card-footer">
-            @{
-                if (@ViewBag.article.Status == "approved")
-                {
-                    ViewBag.ViewName = "approved Articles";
-                    <div class="float-right">
-                        <button type="button" class="btn btn-dark">
-                            <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
+            <div class="card-body p-0" style="text-align:right">
+                <div class="mailbox-read-info">
+                    الكلمات المفتاحية: 
+                    @foreach (var item in ViewBag.Keywords)
+                    {
+                        <span>@item.Name |</span>
+
+                    }
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                @{
+                    if (@ViewBag.article.Status == "approved")
+                    {
+                        ViewBag.ViewName = "approved Articles";
+                        <div class="float-right">
+                            <button type="button" class="btn btn-dark">
+                                <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
+                            </button>
+                            <button type="button" class="btn btn-dark">
+                                <a href="/admin/Articles/appendArticle/@ViewBag.article.ID">Append</a>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-danger">
+                            <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
                         </button>
+
+                    }
+                    else if (@ViewBag.article.Status == "reject")
+                    {
+                        ViewBag.ViewName = "reject Articles";
+
+                        <div class="float-right">
+                            <button type="button" class="btn btn-success">
+                                <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                            </button>
+                        </div>
+
                         <button type="button" class="btn btn-dark">
                             <a href="/admin/Articles/appendArticle/@ViewBag.article.ID">Append</a>
                         </button>
-                    </div>
-                    <button type="button" class="btn btn-danger">
-                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
-                    </button>
-
-                }
-                else if (@ViewBag.article.Status == "append")
-                {
-                    ViewBag.ViewName = "appended Articles";
-
-                    <div class="float-right">
-                        <button type="button" class="btn btn-success">
-                            <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                        <button type="button" class="btn btn-danger">
+                            <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
                         </button>
-                    </div>
 
-                    <button type="button" class="btn btn-dark">
-                        <a href="/admin/Articles/appendArticle/@ViewBag.article.ID">Append</a>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
-                    </button>
+                    }
+                    else if (@ViewBag.article.Status == "append")
+                    {
+                        ViewBag.ViewName = "append Articles";
 
-                }
-                else if (@ViewBag.article.Status == "append")
-                {
-                    ViewBag.ViewName = "rejected Articles";
-
-                    <div class="float-right">
-                        <button type="button" class="btn btn-success">
-                            <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                        <div class="float-right">
+                            <button type="button" class="btn btn-success">
+                                <a href="/admin/Articles/approveArticle/@ViewBag.article.ID">Approve</a>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-dark">
+                            <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
                         </button>
-                    </div>
-                    <button type="button" class="btn btn-dark">
-                        <a href="/admin/Articles/rejectArticle/@ViewBag.article.ID"> Reject  </a>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                        <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
-                    </button>
+                        <button type="button" class="btn btn-danger">
+                            <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
+                        </button>
+                    }
                 }
-            }
+            </div>
+            <!-- /.card-footer -->
         </div>
-        <!-- /.card-footer -->
-    </div>
     <!-- /.card -->
 </div>

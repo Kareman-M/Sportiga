@@ -7,7 +7,7 @@
 @section Customscripts
 {
     <script>
-        var keywords = [];
+        let keywords = [];
         var delbtns;
         document.getElementById('add').onclick = function() {
             var keyword = document.getElementById('keyowrd').value;
@@ -16,19 +16,22 @@
             keywords.push(obj);
             console.log(keywords);
             document.getElementsByClassName("list-group")[0].innerHTML +=
-                `<li class="list-group-item ">${keyword}
+                `<li class="list-group-item " style="width: 77%">${keyword}
             <button class="btn btn-danger delete" 
             style="position: absolute; left: 100%; top: 0%; height: 100%; font-size: 20px;">x</button>
             </li>`;
             keyword= "";
 
             delbtns = $('.delete');
+            var keyval = keywords;
             for (var i = 0; i < delbtns.length; i++) {
 
                 delbtns[i].onclick = function () {
                     this.parentNode.remove();
-                    keywords.splice(i, 1);
-                
+                    keyval.splice(i, 2);
+                    keywords.splice(i, 2);
+                    
+                    console.log(keyval);
                 }
             }
         };
@@ -53,13 +56,13 @@
     <button id="add">add</button>
     <button id="save" onclick="call()"> save</button>
 </div>*@
-<div class="container" style="width:80%">
+<div class="container" style="width: 80%">
     <input id="articleID" value=@ViewBag.ArticleID type="hidden" />
     <div class="input-group mb-3" style="width:65%">
         <div class="input-group-prepend">
             <button class="btn btn-outline-secondary" id="add" type="button">Add</button>
         </div>
-        <input id="keyowrd" style="height: 50px; text-align: right;" type="text" class="" placeholder="اضف الكلمة المفتاحيه" aria-label="Insert Keyword" aria-describedby="basic-addon1">
+        <input id="keyowrd" style="height: 50px; text-align: right; width: 70%; " type="text" class="" placeholder="اضف الكلمة المفتاحيه" aria-label="Insert Keyword" aria-describedby="basic-addon1">
     </div>
 
     <div class="keywordsList" style="width:62%">
@@ -69,6 +72,6 @@
         </ul>
     </div>
     <div>
-        <button id="save" onclick="call()" class="btn btn-info" style="text-align:center;">Save</button>
+        <button id="save" onclick="call()" class="btn btn-info" style=" margin-top:10px; text-align: center; width: 52%;">Save</button>
     </div>
 </div>
