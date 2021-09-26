@@ -75,7 +75,8 @@ namespace Sportiga.Areas.Admin.Controllers
             {
 
             string imgtxt = Path.GetExtension(imgFile.FileName);
-            var imgSave = Path.Combine(_IWeb.WebRootPath,"images", imgFile.FileName);
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + imgFile.FileName;
+            var imgSave = Path.Combine(_IWeb.WebRootPath,"images", uniqueFileName);
            var stream = new FileStream(imgSave, FileMode.Create);
             await imgFile.CopyToAsync(stream);
             articles.Image = imgFile.FileName;
@@ -160,14 +161,20 @@ namespace Sportiga.Areas.Admin.Controllers
         [Authorize]
         public IActionResult AddKeywords( [FromBody]List<Keywords> keywords)
         {
-            var id = keywords[1].ArticlesId;
-            for(var i = 0; i<keywords.Count; i++)
+            try
             {
-               // keywords[i].Articles = article;
-                _Context.Keywords.Add(keywords[i]);
-                _Context.SaveChanges();
+
+            _Context.Keywords.AddRange(keywords);
+            _Context.SaveChanges();
+            
             }
-            return RedirectToAction("Write");
+            catch
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
+
         }
+
     }
 }

@@ -150,9 +150,10 @@ namespace WebApplication2.Areas.Admin.Controllers
                 return RedirectToAction("AssignRoleToUser", "CreateRole");
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                return NotFound();
+                return new ContentResult() { Content = "you can't delete this user, it may attach with articles or in role.", ContentType = "Application/Javascript" };
+
             }
 
         }

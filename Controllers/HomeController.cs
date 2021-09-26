@@ -131,7 +131,15 @@ namespace Sportiga.Controllers
             ViewBag.Articles = _Context.Articles.Where(s => s.ApplicationUsersId == id && s.Status == "approved").OrderByDescending(s => s.Date).ToList();
             return View();
         }
-
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            List < Models.Articles > articles = new List<Models.Articles>();
+            articles.AddRange(_Context.Articles.Where(s => s.Title.Contains(search) || s.Topic.Contains(search)).OrderByDescending(s=> s.Date).Distinct());
+            ViewBag.Word = search;
+            ViewBag.Articles = articles;
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

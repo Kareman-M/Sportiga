@@ -1,0 +1,56 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Sportiga.Areas.Identity.Pages.Account.ForgetPasswordViewModel
+@{
+
+    ViewData["Title"] = "forget Passowrd";
+    Layout = "~/Views/Shared/_CustomIdentityLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6" style="margin:auto;">
+            <div class="card " style=" border-radius: 25px;">
+                <div class="card-header" style=" background:#F0A306">
+                    <h3 class="card-title" style="margin:auto;color:#fff;">@ViewData["Title"]</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form class="form-horizontal" style="padding:20px" id="account" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label asp-for="newPassword"></label>
+                        <input asp-for="newPassword" class="form-control" />
+                        <span asp-validation-for="newPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label asp-for="confirmPassword"></label>
+                        <input asp-for="confirmPassword" class="form-control" />
+                        <span asp-validation-for="confirmPassword" class="text-danger"></span>
+                    </div>
+
+
+
+                    <!-- /.card-body -->
+                    <div class="form-group" style="margin-top:30px;">
+                        <button type="submit" style="width:100%" class="btn btn-dark">Change</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}

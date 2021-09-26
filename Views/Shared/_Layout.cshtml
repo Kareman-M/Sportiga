@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject ApplicationDbContext _Context;
+@{
+    var categories = _Context.Categories;
+    var social = _Context.Socialmedias.ToList();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -31,171 +36,198 @@
     @*<link rel="stylesheet" href="~/SiteCss/Home.scss">*@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    @RenderSection("style", required:false)
+    <!-- Header-->
+    <link href="~/SiteCss/LayOutStyle.css" rel="stylesheet" />
+    @RenderSection("style", required: false)
 
+<style>
+      
+</style>
 </head>
+
 <body>
 
-    <style>
-           .navbar {
-          padding:0rem;
-          margin-bottom:2rem;
-        }
+    <!-------------------------------------------NAVBAR---------------------------------------->
 
-        .dropdown .dropdown-menu {
-          border-radius:0;
-         }
-        .navbar-nav{
-            overflow:hidden;
-        }
-        /* Medium devices (tablets, 768px and up)
-        The navbar toggle appears at this breakpoint */
-        @@media (min-width: 768px) {
-            .dropdown:hover .dropdown-menu {
-                display: block;
-                margin-top: 0;
-                border-radius: 0;
-            }
-        }
-    </style>
 
     <header>
+        <div class="pcScreenVersion">
+            <div class="md">
+                <div class="container">
+                    <div class="logo-area">
+                        <a href="/" class="logo" title="سبورتيجا">
+                            <img class="dark-logo" src="../Sportiga.png" width="320" height="113" alt="سبورتيجا">
+                        </a>
 
-        <div class="navbar-brand ml-3" style="margin:30px; width:100%">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-4">
-                        <h2 style="text-align:right;font-size: 42px;">سبورتيجا</h2>
                     </div>
-                    <div class="col-4"></div>
-                    <div class="col-4" style="">
-                        <ul style="list-style:none;width: 100%;display:flex;justify-content: end;position: absolute;top: -37px;left: 0;" class="social">
-                            <li style="width: 13%; font-size: 30px; color:blue;">
-                                <i class="fab fa-facebook"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color:red">
-                                <i class="fab fa-youtube"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color:#74c0fc">
-                                <i class="fab fa-twitter"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color:orange">
-                                <i class="  fa fa-rss-square"></i>
-                            </li>
+                    <div class="left-area">
+                        <div class="top">
 
-                        </ul>
+                            <div class="social">
+                                <a href="@social[0].Link" style="background:none">
+                                    <i class="fab fa-facebook" style="color:darkblue;width: inherit;height: inherit;font-size: 32px;"></i>
+                                </a>
+                                <a href="@social[1].Link" style="background:none">
+                                    <i class="fab fa-youtube" style="color:red;width: inherit;height: inherit;font-size: 32px;"></i>
+                                </a>
+                                <a href="@social[2].Link" style="background:none">
+                                    <i class="fab fa-twitter" style="color:#1DAaF2;width: inherit;height: inherit;font-size: 32px;"></i>
+                                </a>
+                                <a href="@social[3].Link" style="background:none">
+                                    <i class="fab fa-blogger" style="color:#FFA500;width: inherit;height: inherit;font-size: 32px;"></i>
+                                </a>
+
+
+                            </div>
+
+                        </div>
+                        <div class="">
+                            <div class="adfull m">
+                                <div class="cont">
+                                    <script async="" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+                                    <div id="LedrLogo" data-google-query-id="CJj83_L_l_MCFcUm6QodRLsPZg">
+
+                                        <div id="google_ads_iframe_/21981179284/Cairo24-2021-leaderboard-beside-logo-728x90_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/21981179284/Cairo24-2021-leaderboard-beside-logo-728x90_0" title="3rd party ad content" name="google_ads_iframe_/21981179284/Cairo24-2021-leaderboard-beside-logo-728x90_0" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" srcdoc="" data-google-container-id="2" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="secondnav">
+
+                <div class="right-btn">
+                    <a href="#" style="margin-top: 5px; font-size: 20px; color: #efef1a;" class="btn btn-primaryy menu" data-pushbar-target="menu" title="menu" rel="noreferrer noopener">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <div class="scroll-wrapper">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/"> الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1">كرة مصرية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/2">كرة عربية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/3">كرة عالمية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1002">نجوم كرة القدم</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1003">ميركاتو</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1004">رياضات أخرى</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1005">تقارير وحورات </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1006"> تحقيقات صحفية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1007">أقلام حرة  </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1008"> فيديوهات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/1009"> سبورتيجا لايت</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="left-btns">
+
+                    <a href="#" style="margin-top: 5px; font-size: 20px; color: #efef1a;" class="btn btn-primaryy search" onclick="openSearch()" title="search" rel="noreferrer noopener">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
-            <div class="navbar-toggler-right">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
+
+        <div class="minScreenVirsion">
+            <nav class="navbar">
+                <div class="nav-item-mobile">
+                    <a href="#" class="btn btn-primaryy menu" data-pushbar-target="menu" title="menu" rel="noreferrer noopener">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <a href="/" class="logo" title="سبورتيجا">
+                        <img src="../Sportiga.png" width="168" height="50" loading="lazy" alt="سبورتيجا">
+                    </a>
+                    <a href="#" class="btn btn-primaryy search" onclick="openSearch()" title="search" rel="noreferrer noopener">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+
+            </nav>
 
 
-
-
-            <div class="collapse navbar-collapse flex-column " id="navbar" style="border: 1.3 solid #F0A306">
-
-                <ul class="navbar-nav  w-106 justify-content-center px-3">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">الرئيسية<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">كرة مصرية<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">كرة عربية<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">كرة عالمية<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">نجوم كرة القدم<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">ميركاتو<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">رياضات أخرى<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">تقارير وحوارات<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">أقلام حرة<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">تحقيقات صحفية<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">سبورتيجا لايت<span class="sr-only">(current)</span></a>
-                    </li>
-                  
-                    <li class="nav-item dropdown" style="font-size:25px">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+            <div class="scroll-wrapper-mobile">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a href="/" class="nav-link" title=" سبورتيجا ">
+                            الرئيسية
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">تقارير وحورات</a>
-                            <a class="dropdown-item" href="#">تحقيقات صحفية</a>
-                            <a class="dropdown-item" href="#">أقلام حرة</a>
-                            <a class="dropdown-item" href="#">فيديوهات</a>
-                            <a class="dropdown-item" href="#">سبورتيجا لايت</a>
-                        </div>
                     </li>
+                    @foreach (var item in categories)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/@item.ID">@item.Name</a>
+                        </li>
 
+                    }
                 </ul>
-
-
-
-
             </div>
+        </div>
 
-        </nav>
     </header>
+
+    <!------------------------------------------- VIEWS SECTION ---------------------------------------->
 
 
     <section>
 
         @RenderBody()
     </section>
+    <!-------------------------------------------FOOTER--------------------------------------->
 
-    <footer style="float: right; width: 100%; background:#333;">
-        <div class="top" style="height: 60px; background: #333;">
+
+    <footer style="float: right; width: 100%; background:#000;">
+        <div class="top" style="background: #000;">
             <div class="container">
 
                 <div class="row">
-                    <div class="col-4">
-                        <h2 style="text-align:right;font-size: 46px; color:#fff;">سبورتيجا</h2>
+                    <div class="col-12 col-lg-6">
+                        <h2 style="font-size: 46px; color:#fff;" class="sportigaCenter">سبورتيجا</h2>
                     </div>
-                    <div class="col-4"></div>
-                    <div class="col-4" style="">
-                        <ul style="list-style:none;width: 100%;display:flex;justify-content: end;position: absolute;top: 10px;left: 0;" class="social">
-                            <li style="width: 13%; font-size: 30px; color: #fff;">
-                                <i class="fab fa-facebook"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color:#fff">
-                                <i class="fab fa-youtube"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color: #fff">
-                                <i class="fab fa-twitter"></i>
-                            </li>
-                            <li style="width: 13%; font-size: 30px; color: #fff">
-                                <i class="  fa fa-rss-square"></i>
-                            </li>
+                    <div class="col-12 col-lg-6" style="">
 
-                        </ul>
+                        <div class="social socialCenter">
+                            <a href="@social[0].Link" style="background:none">
+                                <i class="fab fa-facebook" style="color:darkblue;width: inherit;height: inherit;font-size: 32px;"></i>
+                            </a>
+                            <a href="@social[1].Link" style="background:none">
+                                <i class="fab fa-youtube" style="color:red;width: inherit;height: inherit;font-size: 32px;"></i>
+                            </a>
+                            <a href="@social[2].Link" style="background:none">
+                                <i class="fab fa-twitter" style="color:#1DAaF2;width: inherit;height: inherit;font-size: 32px;"></i>
+                            </a>
+                            <a href="@social[3].Link" style="background:none">
+                                <i class="fab fa-blogger" style="color:#FFA500;width: inherit;height: inherit;font-size: 32px;"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-       
+
         <div class="copy" style="text-align: center; height:30px; color: #fff; background: #000;">
             <div class="container">
                 © 2021 sportiga.com All Rights Reserved.
@@ -203,9 +235,77 @@
         </div>
     </footer>
 
+    <!-------------------------------------------SIDE MENU---------------------------------------->
+
+
+    <div class="menu-nav" data-pushbar-id="menu" data-pushbar-direction="right" style="right: 0;
+    transform: translateZ(0) translateX(100%);">
+        <div class="nav-side-menu">
+            <div class="brand">
+                <button type="button" aria-label="close" class="close" data-pushbar-close="">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="/" class="logo" title="سبورتيجا">
+                    <img src="../Sportiga.png" width="101" height="30" alt="سبورتيجا" loading="lazy">
+                </a>
+
+            </div>
+            <div style="text-align: center;float: right; width: 100%;padding: 10px;">
+            </div>
+            <div class="menu-list" style="height: calc(100% - 166px);">
+                <ul class="nav flex-column" style="margin:0;">
+                    <li class="nav-item ">
+                        <a href="/" class="nav-link" title=" سبورتيجا ">
+                            الرئيسية
+                        </a>
+                    </li>
+                    @foreach (var item in categories)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Categories/@item.ID">@item.Name</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+            <div class="social">
+                <a href="@social[0].Link" style="background:none">
+                    <i class="fab fa-facebook" style="color:darkblue;width: inherit;height: inherit;font-size: 32px;"></i>
+                </a>
+                <a href="@social[1].Link" style="background:none">
+                    <i class="fab fa-youtube" style="color:red;width: inherit;height: inherit;font-size: 32px;"></i>
+                </a>
+                <a href="@social[2].Link" style="background:none">
+                    <i class="fab fa-twitter" style="color:#1DAaF2;width: inherit;height: inherit;font-size: 32px;"></i>
+                </a>
+                <a href="@social[3].Link" style="background:none">
+                    <i class="fab fa-blogger" style="color:#FFA500;width: inherit;height: inherit;font-size: 32px;"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
 
 
 
+    <!-------------------------------------------Search---------------------------------------->
+
+    <div id="search-box" class="">
+        <button type="button" class="close" onclick="closeSearch()">×</button>
+        <form id="search-form" method="post" asp-action="Search" asp-controller="Home">
+            <label for="search"></label>
+            <input type="text" id="search" name="search" value="" placeholder="  إكتب كلمة البحث هنا">
+            <div class="btns">
+                <button type="submit" class="btn btn-primary" aria-label="search">
+                    <i class=" fa fa-search"></i>
+                    بحث
+                </button>
+                <button type="button" class="btn btn-primary" onclick="closeSearch()"> إلغاء</button>
+            </div>
+        </form>
+    </div>
+
+    <!------------------------------------------------------------------------------------->
     <!-- jQuery -->
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -242,6 +342,21 @@
     <script src="~/dist/js/demo.js"></script>
     <!-- Home JS-->
     <script src="~/SiteJS/Home.js"></script>
+    <script>
+        $('.btn-primaryy.menu').click(function () {
+            $('.menu-nav').addClass('opened');
+        });
+        $(".close").click(function () {
+            $(".menu-nav").removeClass("opened");
+        });
+        function openSearch() {
+            $('#search-box').addClass("open");
+        }
+        function closeSearch() {
+            $('#search-box').removeClass("open");
+        }
+    </script>
+
     @RenderSection("script", required: false)
 </body>
 </html>

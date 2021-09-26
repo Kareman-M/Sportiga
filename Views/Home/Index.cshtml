@@ -79,8 +79,8 @@
                     <div class="carousel-inner">
                         @foreach (var item in ViewBag.lastArticles)
                         {
-                            <div class="carousel-item ">
-                                <img src="~/images/@item.Image" alt="Hills">
+                            <div class="carousel-item " style="height:500px">
+                                <img src="~/images/@item.Image" alt="Hills" style="border-radius:20px;">
                                 <div class="carousel-caption caption-custom">
                                     <a href="/Home/essay/@item.ID">
                                         <h3>
@@ -98,7 +98,7 @@
                             {
                                 <li class="list-inline-item ">
                                     <a id="carousel-selector-@i" class="selected" data-slide-to="@i" data-target="#custCarousel">
-                                        <img src="~/images//@item.Image" class="img-fluid">
+                                        <img src="~/images//@item.Image"  class="img-fluid">
                                     </a>
                                 </li>
 
@@ -871,9 +871,8 @@
                 </div>
             </div>
             <div class="foot">
-                <a href="/home/categories/1008" title="فيديوهات " class="more" >المزيد</a>
+                <a href="/home/categories/1008" title="فيديوهات " class="more">المزيد</a>
             </div>
         </div>
     </div>
 </section>
-

@@ -25,14 +25,13 @@
         float: right;
         position: relative;
         font-weight: 700;
-        color: rgb(240, 173, 78);
-        fill: rgb(240, 173, 78);
+      
     }
-    article.content .author a {
-        color: rgb(240, 173, 78);
-        fill: rgb(240, 173, 78);
-        font-size:16px;
-    }
+        article.content .author a {
+            color: #efef1a;
+            fill: #333;
+            font-size: 16px;
+        }
  
    
     article.content .publish {
@@ -51,10 +50,10 @@
         }
     article.content i {
         font-size: 20px;
-        color: rgb(240, 173, 78);
+        color: #efef1a;
     }
     article.content .publish .item .icon {
-        fill: rgb(240, 173, 78);
+        fill: #efef1a;
     }
     article.content figure.main-img {
         padding-bottom: 0 !important;
@@ -106,10 +105,10 @@
     .paragraph-list {
         max-width: 100%;
         overflow: hidden;
-        //float: right;
+        /*float: right;*/
         width: 100%;
         line-height: 1.8;
-        BORDER-BOTTOM: 1PX SOLID #F0A306;
+        BORDER-BOTTOM: 1PX SOLID #efef1a;
         MARGIN-BOTTOM: 30PX;
     }
     .breadcrumb {
@@ -183,7 +182,7 @@
         }
             .keywords .btn :hover {
                 background: #BBB;
-                color: #F0A306;
+                color: #efef1a;
                 border: 1PX solid #000;
             }
 </style>
@@ -199,7 +198,7 @@
     </section>
     <div class="container">
         <div class="row">
-            <div class="col-8 right-col">
+            <div class="col-md-12 col-lg-8 right-col">
                 <div class="block news-article">
                     <div class="title">
                         <a href="/Home/Categories/@ViewBag.category.ID" title="@ViewBag.category.Name"><h2>@ViewBag.category.Name</h2></a>
@@ -288,7 +287,7 @@
             </div>
 
 
-            <div class="col-4 left-col">
+            <div class="col-md-12 col-lg-4 left-col">
                 <div class="block ">
                     <div class="title">
                         <h2> ﺗﻔﻀﻴﻼﺕ اﻟﻘﺮاء</h2>

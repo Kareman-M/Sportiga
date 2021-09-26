@@ -17,7 +17,8 @@ using Sportiga.Models;
 
 namespace Sportiga.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
+   // [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -96,7 +97,7 @@ namespace Sportiga.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
     }
 }

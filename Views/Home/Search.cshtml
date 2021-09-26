@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = @ViewBag.category;
+    ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section style{
@@ -14,7 +14,6 @@
             background: #000;
             color: #fff;
         }
-
         .breadcrumb {
             display: flex;
             flex-wrap: wrap;
@@ -73,7 +72,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/" title="">الرئيسية</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> @ViewBag.category</li>
+            <li class="breadcrumb-item active" aria-current="page"> @ViewBag.Word</li>
         </ol>
     </div>
 </section>
@@ -82,7 +81,7 @@
     <div class="container">
         <div class="block">
             <div class="title">
-                <a href="" title="@ViewBag.category"><h2>@ViewBag.category</h2></a>
+                <a href="" title="@ViewBag.Word"><h2>@ViewBag.Word</h2></a>
             </div>
             <div class="content">
                 <div class="row" id="t1">
@@ -106,6 +105,8 @@
         </div>
     </div>
 </section>
+
+
 
 @section script{
     <script>
@@ -151,9 +152,9 @@ jQuery.fn.cssImportant = function(name, value) {
             var numPages = rowsTotal / rowsShown;
             for (i = 0; i < numPages; i++) {
                var pageNum = i + 1;
-               $('#nav').append('<a href="#" class="btn-outline-info"  rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
+               $('#nav').append('<a href="#" class=""  rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
             }
-
+            
             $('#t1 .item').cssImportant('display', 'none').hide();
             $('#t1 .item').slice(0, rowsShown).cssImportant('display', 'block').show();
             $('#nav a:first').addClass('customactive');

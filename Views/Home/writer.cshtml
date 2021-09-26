@@ -11,6 +11,10 @@
             padding: 0;
             margin: 0;
         }
+        .customactive {
+            background: #000;
+            color: #fff;
+        }
 
         .breadcrumb {
             display: flex;
@@ -164,24 +168,93 @@
                 <a href="" title="@ViewBag.username"><h2>@ViewBag.category</h2></a>
             </div>
             <div class="content">
-                <div class="row">
+                <div class="row" id="t1">
                     @foreach (var item in ViewBag.Articles)
                     {
-                            <div class="col-sm-6 col-md-4">
-                                <div class="item-card">
-                                    <a href="/Home/essay/@item.ID">
-                                        <div class="content-img ss">
-                                            <img class=" lazyloaded" src="~/images/@item.Image" data-src="~/images/@item.Image" width="740" height="416" alt="@item.Title">
-                                        </div>
-                                        <div class="content-text">
-                                            <h3>@item.Title</h3>
-                                        </div>
-                                    </a>
-                                </div>
+                        <div class="col-sm-6 col-md-4 item">
+                            <div class="item-card">
+                                <a href="/Home/essay/@item.ID">
+                                    <div class="content-img ">
+                                        <img class=" lazyloaded" src="~/images/@item.Image" data-src="~/images/@item.Image" width="740" height="416" alt="@item.Title">
+                                    </div>
+                                    <div class="content-text">
+                                        <h3>@item.Title</h3>
+                                    </div>
+                                </a>
                             </div>
+                        </div>
                     }
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@section script{
+    <script>
+        /**
+ * Sets a CSS style on the selected element(s) with !important priority.
+ * This supports camelCased CSS style property names and calling with an object
+ * like the jQuery `css()` method.
+ * Unlike jQuery's css() this does NOT work as a getter.
+ *
+ * @@param {string|Object<string, string>} name
+ * @@param {string|undefined} value
+ */
+jQuery.fn.cssImportant = function(name, value) {
+  const $this = this;
+  const applyStyles = (n, v) => {
+    // Convert style name from camelCase to dashed-case.
+    const dashedName = n.replace(/(.)([A-Z])(.)/g, (str, m1, upper, m2) => {
+      return m1 + "-" + upper.toLowerCase() + m2;
+    });
+    // Loop over each element in the selector and set the styles.
+    $this.each(function(){
+      this.style.setProperty(dashedName, v, 'important');
+    });
+  };
+  // If called with the first parameter that is an object,
+  // Loop over the entries in the object and apply those styles.
+  if(jQuery.isPlainObject(name)){
+    for(const [n, v] of Object.entries(name)){
+       applyStyles(n, v);
+    }
+  } else {
+    // Otherwise called with style name and value.
+    applyStyles(name, value);
+  }
+  // This is required for making jQuery plugin calls chainable.
+  return $this;
+};
+
+        $(document).ready(function () {
+            $('#t1').after('<div id="nav" class="text-center"></div>');
+            var rowsShown = 120;
+            var rowsTotal = $('#t1 .item').length;
+            var numPages = rowsTotal / rowsShown;
+            for (i = 0; i < numPages; i++) {
+               var pageNum = i + 1;
+               $('#nav').append('<a href="#" class="btn-outline-info"  rel="' + i + '">&emsp;' + pageNum + '&emsp;</a> ');
+            }
+
+            $('#t1 .item').cssImportant('display', 'none').hide();
+            $('#t1 .item').slice(0, rowsShown).cssImportant('display', 'block').show();
+            $('#nav a:first').addClass('customactive');
+            $('#nav a').bind('click', function (e) {
+                e.preventDefault();
+                $('#nav a').removeClass('customactive');
+                $(this).addClass('customactive');
+                var currPage = $(this).attr('rel');
+                var startItem = currPage * rowsShown;
+                var endItem = startItem + rowsShown;
+                //$('#t1 .item').attr('style', 'display:none !important')
+
+                $('#t1 .item').cssImportant('display', 'none').hide().slice(startItem, endItem).
+                    css('display', 'flex').animate({
+                        display: 'block'
+                    }, 300);
+            });
+        });
+    </script>
+
+}
