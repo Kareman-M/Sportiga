@@ -6,11 +6,11 @@
 @section style{
     <style>
         .carousel-item-small {
-            height: 470px;
+            height: 350px;
         }
         @@media(min-width:700px){
             .carousel-item-small{
-                height:335px;
+                height:330px;
             }
         }
         /************/
@@ -88,11 +88,11 @@
                     <div class="carousel-inner">
                         @foreach (var item in ViewBag.lastArticles)
                         {
-                            <div class="carousel-item carousel-item-small " >
+                            <div class="carousel-item carousel-item-small "  >
                                 <img src="~/images/@item.Image" alt="Hills" style="border-radius:20px;">
-                                <div class="carousel-caption caption-custom">
+                                <div class="carousel-caption caption-custom" style="overflow:hidden">
                                     <a href="/Home/essay/@item.ID">
-                                        <h3>
+                                        <h3 style="font-size:19px">
                                             @item.Title
                                         </h3>
                                     </a>
