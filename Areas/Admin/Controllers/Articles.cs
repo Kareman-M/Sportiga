@@ -79,7 +79,7 @@ namespace Sportiga.Areas.Admin.Controllers
             var imgSave = Path.Combine(_IWeb.WebRootPath,"images", uniqueFileName);
            var stream = new FileStream(imgSave, FileMode.Create);
             await imgFile.CopyToAsync(stream);
-            articles.Image = imgFile.FileName;
+            articles.Image = uniqueFileName;
             var _articles = _Context.Articles.Add(articles);
             _Context.SaveChanges();
                 return RedirectToAction("Keywords", "Articles", new { id = articles.ID });

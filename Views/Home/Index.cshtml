@@ -5,6 +5,15 @@
 }
 @section style{
     <style>
+        .carousel-item-small {
+            height: 470px;
+        }
+        @@media(min-width:700px){
+            .carousel-item-small{
+                height:335px;
+            }
+        }
+        /************/
         .sec-sport {
             background-image: url("/images/SectionBackground.jpg");
             background-repeat: no-repeat;
@@ -79,7 +88,7 @@
                     <div class="carousel-inner">
                         @foreach (var item in ViewBag.lastArticles)
                         {
-                            <div class="carousel-item " style="height:500px">
+                            <div class="carousel-item carousel-item-small " >
                                 <img src="~/images/@item.Image" alt="Hills" style="border-radius:20px;">
                                 <div class="carousel-caption caption-custom">
                                     <a href="/Home/essay/@item.ID">
@@ -96,9 +105,9 @@
                         @{ var i = 0;
                             foreach (var item in ViewBag.lastArticles)
                             {
-                                <li class="list-inline-item ">
+                                <li class="list-inline-item " style="height:35px">
                                     <a id="carousel-selector-@i" class="selected" data-slide-to="@i" data-target="#custCarousel">
-                                        <img src="~/images//@item.Image"  class="img-fluid">
+                                        <img src="~/images//@item.Image"  class="img-fluid" style="height:100%">
                                     </a>
                                 </li>
 
@@ -273,7 +282,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.KoraAlamia[1].ID" title="">
                                         <div class="content-img">
@@ -287,7 +296,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.KoraAlamia[2].ID" title="">
                                         <div class="content-img">
@@ -301,7 +310,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.KoraAlamia[3].ID" title="">
                                         <div class="content-img">
@@ -346,7 +355,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.NgomElkora[1].ID" title="">
                                         <div class="content-img">
@@ -360,7 +369,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.NgomElkora[2].ID" title="">
                                         <div class="content-img">
@@ -374,7 +383,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.NgomElkora[3].ID" title="">
                                         <div class="content-img">
@@ -419,7 +428,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Merkato[1].ID" title="">
                                         <div class="content-img">
@@ -433,7 +442,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Merkato[2].ID" title="">
                                         <div class="content-img">
@@ -447,7 +456,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Merkato[3].ID" title="">
                                         <div class="content-img">
@@ -526,7 +535,7 @@
                     </a>
                 </div>
                 <div class="content">
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-12 col-md-6">
                             <div class="item-bg lg   ">
                                 <a href="/Home/Essay/@ViewBag.SportigaLite[0].ID">
@@ -542,8 +551,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <div class="row">
-                                <div class="col-12 col-sm-6 col-md-6">
+                            <div class="row" style="justify-content:center">
+                                <div class="col-10 col-sm-6 col-md-6">
                                     <div class="item-bg sm  ">
                                         <a href="/Home/Essay/@ViewBag.SportigaLite[1].ID">
                                             <div class="content-img ">
@@ -557,7 +566,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-6">
+                                <div class="col-10 col-sm-6 col-md-6">
                                     <div class="item-bg sm  ">
                                         <a href="/Home/Essay/@ViewBag.SportigaLite[2].ID">
                                             <div class="content-img ">
@@ -571,7 +580,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-6">
+                                <div class="col-10 col-sm-6 col-md-6">
                                     <div class="item-bg  sm ">
                                         <a href="/Home/Essay/@ViewBag.SportigaLite[3].ID">
                                             <div class="content-img ">
@@ -585,7 +594,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-6">
+                                <div class="col-10 col-sm-6 col-md-6">
                                     <div class="item-bg  sm ">
                                         <a href="/Home/Essay/@ViewBag.SportigaLite[4].ID">
                                             <div class="content-img">
@@ -635,7 +644,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.TqarerAnd7warat[1].ID" title="">
                                         <div class="content-img">
@@ -649,7 +658,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.TqarerAnd7warat[2].ID" title="">
                                         <div class="content-img">
@@ -663,7 +672,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.TqarerAnd7warat[3].ID" title="">
                                         <div class="content-img">
@@ -708,7 +717,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.T7kikatSa7fia[1].ID" title="">
                                         <div class="content-img">
@@ -722,7 +731,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.T7kikatSa7fia[2].ID" title="">
                                         <div class="content-img">
@@ -736,7 +745,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.T7kikatSa7fia[3].ID" title="">
                                         <div class="content-img">
@@ -781,7 +790,7 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Aklam7ora[1].ID" title="">
                                         <div class="content-img">
@@ -795,7 +804,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Aklam7ora[2].ID" title="">
                                         <div class="content-img">
@@ -809,7 +818,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-12">
+                            <div class=" col-lg-12">
                                 <div class="item-li  ">
                                     <a href="/Home/Essay/@ViewBag.Aklam7ora[3].ID" title="">
                                         <div class="content-img">
