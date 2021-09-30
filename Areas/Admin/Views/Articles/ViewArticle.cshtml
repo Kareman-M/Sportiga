@@ -67,6 +67,9 @@
                         <button type="button" class="btn btn-danger">
                             <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
                         </button>
+                        <button type="button" class="btn btn-info">
+                            <a href="/admin/Articles/EditArticle/@ViewBag.article.ID">Edit</a>
+                        </button>
 
                     }
                     else if (@ViewBag.article.Status == "reject")
@@ -85,6 +88,9 @@
                         <button type="button" class="btn btn-danger">
                             <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
                         </button>
+                        <button type="button" class="btn btn-info">
+                            <a href="/admin/Articles/EditArticle/@ViewBag.article.ID">Edit</a>
+                        </button>
 
                     }
                     else if (@ViewBag.article.Status == "append")
@@ -101,6 +107,9 @@
                         </button>
                         <button type="button" class="btn btn-danger">
                             <a href="/admin/Articles/DeleteArticle/@ViewBag.article.ID">Delete</a>
+                        </button>
+                        <button type="button" class="btn btn-info">
+                            <a href="/admin/Articles/EditArticle/@ViewBag.article.ID">Edit</a>
                         </button>
                     }
                 }

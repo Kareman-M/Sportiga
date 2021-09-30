@@ -142,6 +142,25 @@ namespace Sportiga.Controllers
             ViewBag.Articles = articles;
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult keyword(string id)
+        {
+            ViewBag.Word = id;
+            List<Models.Articles> articles = new List<Models.Articles>();
+            List<Models.Keywords> keywords = new List<Models.Keywords>();
+            keywords.AddRange(_Context.Keywords.Where(s => s.Name.Contains(id)));
+
+            foreach (var keyword in keywords)
+            {
+               
+              articles.AddRange(_Context.Articles.Where(s=> s.ID == keyword.ArticlesId));
+                 
+            }
+            ViewBag.articles = articles.Distinct().OrderByDescending(s => s.Date);
+
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
