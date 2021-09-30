@@ -47,7 +47,7 @@ body {
     height: 130px;
     background: rgba(0,0,0,0.6);
     margin: auto;
-    border-top: 2px solid #efef1a;
+    border-top: 2px solid #ffc93c;
 }
 .caption-custom h3{
     color:#fff;
@@ -68,7 +68,7 @@ body {
     padding: 5px;
     position: relative;
     padding-top: 0;
-    border-bottom: 1px solid #efef1a;
+    border-bottom: 1px solid #ffc93c;
     padding-bottom: 0;
 }
 
@@ -99,7 +99,7 @@ body {
         padding: 0 20px;
         color: #fff;
         font-weight: bolder;
-        background: #efef1a;
+        background: #ffc93c;
         border-radius: 30px;
         line-height: 32px;
         transition: all .35s;
@@ -205,7 +205,7 @@ a {
         color: #293144;
         font-weight: 700;
         line-height: 24px;
-        border: 1px solid #efef1a;
+        border: 1px solid #ffc93c;
         padding: 0 45px;
         display: inline-block;
         font-size: 14px;
@@ -242,7 +242,7 @@ a {
         top: 15px;
         right: 15px;
         color: #fff;
-        background-color: #efef1a;
+        background-color: #ffc93c;
         opacity: 1;
         font-size: 27px;
         border-radius: 50%;
@@ -311,7 +311,7 @@ button.btn-primary {
 }
 
 #search-box .btns button:first-child {
-    background: #efef1a;
+    background: #ffc93c;
 }
 
 #search-box .btns button {

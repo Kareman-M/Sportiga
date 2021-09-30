@@ -24,7 +24,7 @@ namespace Sportiga.Models
         public virtual ApplicationUser ApplicationUsers { get; set; }
         [ForeignKey("ApplicationUsers")]
         public string ApplicationUsersId { get; set; }
-        public virtual IEnumerable<Keywords> Keywords { get; set; }
+        public virtual IList<Keywords> Keywords { get; set; }
  
     }
 }

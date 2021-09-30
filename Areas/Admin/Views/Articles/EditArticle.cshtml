@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Write";
+﻿
+@{
+    ViewData["Title"] = "Edit Article";
     Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
     @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -9,20 +10,31 @@
 
 @section Customscripts{
     <script>
+
+        function showtext() {
+            var text = '@Html.Raw(ViewBag.articles.Topic)';
+            document.querySelector('.note-editable p').innerHTML = `${text}`;
+
+        }
+        window.onload = function () {
+            setTimeout(function () {
+                var text = '@Html.Raw(ViewBag.articles.Topic)';
+            document.querySelector('.note-editable p').innerHTML = `${text}`;
+            }, 0);
+        }
         var previewImg = function (e) {
             var result = document.getElementById("imgPreview");
             result.src = URL.createObjectURL(e.target.files[0])
         }
-      
 
     </script>
 }
 @section Styles{ }
-    <!-- Main content -->
+<!-- Main content -->
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <form method="post" enctype="multipart/form-data" asp-controller="Articles" asp-action="AddArticle">
+            <form method="post" enctype="multipart/form-data" asp-controller="Articles" asp-action="Edit">
 
                 <div class="ccard-headerol-md-12">
                     <div class="card card-outline card-info">
@@ -43,10 +55,10 @@
                         <!-- /.card-header -->
 
                         <div class="card-body pad">
-
+                            <input type="hidden" asp-for="ID" value="@ViewBag.articles.ID" />
                             <div class="form-group ">
-                                <input type="file" id="imgFile" name="imgFile" onclick="previewImg(event)" required />
-                                <img id="imgPreview" style="width: 250px; height: 250px; display: block" />
+                                <input type="file" id="imgFile" name="imgFile" onclick="previewImg(event)"  />
+                                <img id="imgPreview"  src="~/images/@ViewBag.Image" style="width: 250px; height: 250px; display: block" />
                             </div>
                             <div class="form-group ">
                                 <label>Writer Name</label>
@@ -57,31 +69,10 @@
 
                             </div>
 
-
-                            <div>
-                                @{
-                                    if (ViewBag.Roles.Contains("Admin") || ViewBag.Roles.Contains("Desk"))
-                                    {
-                                        <input type="hidden" asp-for="Status" class="form-control" value="approved" />
-                                    }
-                                    else
-                                    {
-                                        <input type="hidden" asp-for="Status" class="form-control" value="append" />
-
-                                    }
-                                }
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Date"></label>
-                                <input type="datetime-local" asp-for="Date" class="form-control" value=""
-                                       aria-label="Large" aria-describedby="inputGroup-sizing-sm" required />
-                                <span asp-validation-for="Date" class="text-danger"></span>
-                            </div>
-
                             <div class="form-group">
                                 <label asp-for="Title"></label>
-                                <input type="text" asp-for="Title" class="form-control"
-                                       placeholder=" Enter The Title" aria-label="Large" aria-describedby="inputGroup-sizing-sm" required />
+                                <input type="text" asp-for="Title" class="form-control" value="@ViewBag.articles.Title"
+                                       placeholder=" Enter The Title" aria-label="Large" aria-describedby="inputGroup-sizing-sm"  />
                                 <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
 
@@ -89,6 +80,7 @@
                             <div class="form-group">
                                 <label asp-for="categoryId">Section</label>
                                 <select class="form-control select2" asp-for="categoryId" style="width: 100%;">
+                                    <option value="@ViewBag.articles.categoryId" selected>@ViewBag.catogry.Name</option>
                                     @foreach (var item in ViewBag.categories)
                                     {
                                         <option value="@item.ID">@item.Name</option>
@@ -101,13 +93,12 @@
                             <div class="form-group">
 
                                 <label asp-for="Topic"></label>
-                                <textarea asp-for="Topic" class="textarea" placeholder="Place some text here" required
+                                <textarea asp-for="Topic" class="textarea" placeholder="Place some text here"
                                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                 <span asp-validation-for="Topic" class="text-danger"></span>
 
                             </div>
-                           
-
+                        
                             <button type="submit" class="btn btn-info " id="SendNotification">Send</button>
 
                         </div>

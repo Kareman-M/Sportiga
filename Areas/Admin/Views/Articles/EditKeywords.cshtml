@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "EditKeywords";
+    Layout = "~/Areas/Admin/Shared/_Layout.cshtml";
+}
+@model Sportiga.Models.Keywords
+
+@section Customscripts{
+    <script>
+        $(document).ready(function () {
+
+
+            $('table .delete').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                $('#deleteSection #id').val(id);
+
+            });
+
+
+            $('table .update').on('click', function () {
+
+                var id = $(this).parent().find('.id').val();
+                $.ajax({
+
+                    type: 'GET',
+                    url: '/Admin/Articles/find/' + id,
+                    success: function (keyword) {
+
+                        $('#updateKeyword #id').val(keyword.id);
+                        $('#updateKeyword #name').val(keyword.name);
+                    }
+
+                })
+            });
+
+
+        });
+
+    </script>
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-start align-items-center ">
+        <h3 class="card-title"></h3>
+        <button class=" btn  bg-success" data-target="#addKeyword" data-toggle="modal">
+            <i class="fa fa-plus mr-1"> </i>
+            Add Keyword
+        </button>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.keywords)
+                {
+
+                    <tr>
+                        <td>@item.Name</td>
+
+                        <td>
+                            <button class=" btn badge bg-primary update" data-toggle="modal" data-target="#updateKeyword">
+                                Update
+                            </button>
+                            <a href=@Url.Action("DeleteKeyword","Articles" , new {id = @item.ID})>
+                                <i class="fas  fa-trash-alt" style="color:red"></i>
+                            </a>
+                            <input type="hidden" value="@item.ID" class="id" />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div >
+        <a href="/admin/articles/ViewArticle/@ViewBag.articleID">Back To Article?</a>
+    </div>
+</div>
+
+<!--Update Keyword-->
+<div class=" modal fade" id="updateKeyword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form method="post" asp-controller="Articles" asp-action="updateKeyword">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input type="text" id="name" name="name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger" value="Save Changes" />
+                    <input type="hidden" id="id" name="id" value="" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Create Modal -->
+
+<div class=" modal fade" id="addKeyword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddSectionLabel"> Add  Keyword </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="text-muted">x</span>
+                </button>
+            </div>
+
+            <form method="post" asp-controller="Articles" asp-action="CreateKeyword">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                       <input type="hidden" id="id" name="id" value="@ViewBag.articleID"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gray-light" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" data-save="modal">Save</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+

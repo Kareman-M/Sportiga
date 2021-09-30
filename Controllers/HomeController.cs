@@ -109,18 +109,20 @@ namespace Sportiga.Controllers
             ViewBag.category = _Context.Categories.Where(c => c.ID == article.categoryId).FirstOrDefault();
             ViewBag.username = _UserManagerr.Users.Where(u => u.Id == article.ApplicationUsersId).FirstOrDefault().FullName;
             ViewBag.Date = article.Date.ToString(" dddd dd / MMMM / yyyy - HH:mm", new CultureInfo("ar-AE"));
-            ViewBag.prefired = _Context.Articles.Take(8);
+            ViewBag.prefired = _Context.Articles.Where(a=> a.ID != id).Take(8);
             List<Models.Articles> similer = new List<Models.Articles>();
             var title = article.Title.Split(" ").ToArray();
             foreach (var item in title)
             {
                 if(item.Length >= 3)
                 {
-                    similer.Add(_Context.Articles.Where(s => s.Title.Contains(item)).FirstOrDefault());
+                    similer.Add(_Context.Articles.Where(s => s.Title.Contains(item) && s.ID != id).FirstOrDefault());
                 }
             }
-
-            ViewBag.simelar = similer.Count >= 4 ? similer.Take(4) : similer;
+            if(similer != null)
+            {
+            ViewBag.simelar = similer.Count >= 4 ? similer.Distinct().Take(4) : similer.Distinct();
+            }
             return View();
         }
         

@@ -28,7 +28,7 @@
       
     }
         article.content .author a {
-            color: #efef1a;
+            color: #ffc93c;
             fill: #333;
             font-size: 16px;
         }
@@ -50,7 +50,7 @@
         }
     article.content i {
         font-size: 20px;
-        color: #efef1a;
+        color: #ffc93c;
     }
     article.content .publish .item .icon {
         fill: #efef1a;
@@ -268,8 +268,9 @@
                         <div class="row">
                             @foreach (var item in ViewBag.simelar)
                             {
-
-                            <div class="col-sm-6">
+                                if (item != null)
+                                { 
+                                     <div class="col-sm-6">
                                 <div class="item-card">
                                     <a href="/Home/Essay/@item.ID">
                                         <div class="content-img"><img class=" lazyloaded" src="~/images/@item.Image" width="780" height="440" alt=""></div>
@@ -279,6 +280,7 @@
                                     </a>
                                 </div>
                             </div>
+                                }
                             }
                         </div>
                     </div>
@@ -297,7 +299,7 @@
                          {
 		 
                         <div class="item-li  ">
-                            <a href="">
+                            <a href="/Home/essay/@item.ID">
                                 <div class="content-img">
                                     <img class=" lazyloaded" src="~/images/@item.Image" data-src="~/images/@item.Image" alt="@item.Title">
                                 </div>
