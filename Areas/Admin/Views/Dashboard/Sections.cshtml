@@ -160,7 +160,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
                     <th>Name</th>
                     <th>Number of Articles</th>
                     <th></th>
@@ -171,10 +170,9 @@
                 {
 
                     <tr>
-                        <td>@item.ID</td>
                         <td>@item.Name</td>
                         <td>
-                            <span class="badge bg-warning">1</span>
+                            <span class="badge bg-warning">@item.Articles.Count</span>
                         </td>
                         <td>
                             <button class=" btn badge bg-primary update" data-toggle="modal" data-target="#updateSection">

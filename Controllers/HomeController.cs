@@ -68,21 +68,13 @@ namespace Sportiga.Controllers
             //
             // FifththSection
             var TqarerAnd7warat = new List<Models.Articles>();
-            TqarerAnd7warat.AddRange(_Context.Articles.Where(s => s.categoryId == 1005 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
+            TqarerAnd7warat.AddRange(_Context.Articles.Where(s => s.categoryId == 1005 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(3));
             ViewBag.TqarerAnd7warat = TqarerAnd7warat;
-            //
-            var T7kikatSa7fia = new List<Models.Articles>();
-            T7kikatSa7fia.AddRange(_Context.Articles.Where(s => s.categoryId == 1006 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
-            ViewBag.T7kikatSa7fia = T7kikatSa7fia;
+
             //
             var Aklam7ora = new List<Models.Articles>();
-            Aklam7ora.AddRange(_Context.Articles.Where(s => s.categoryId == 1007 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(4));
+            Aklam7ora.AddRange(_Context.Articles.Where(s => s.categoryId == 1007 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(3));
             ViewBag.Aklam7ora = Aklam7ora;
-            //
-            // sixSection
-            var Videos = new List<Models.Articles>();
-            Videos.AddRange(_Context.Articles.Where(s => s.categoryId == 1007 && s.Status == "approved").OrderByDescending(s => s.Date).ToList().Take(6));
-            ViewBag.Videos = Videos;
             return View();
         }
 

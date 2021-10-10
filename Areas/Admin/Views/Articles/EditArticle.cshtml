@@ -19,7 +19,8 @@
         window.onload = function () {
             setTimeout(function () {
                 var text = '@Html.Raw(ViewBag.articles.Topic)';
-            document.querySelector('.note-editable p').innerHTML = `${text}`;
+                document.querySelector('.note-editable p').innerHTML = `${text}`;
+                $('textarea').val(text);
             }, 0);
         }
         var previewImg = function (e) {

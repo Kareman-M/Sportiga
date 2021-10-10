@@ -152,6 +152,7 @@ namespace Sportiga.Areas.Admin.Controllers
             ViewBag.Keywords = _Context.Keywords.Where(k => k.ArticlesId == id);
             return View();
         }
+        
         [Authorize(Roles = "Admin,Desk")]
         public IActionResult DeleteArticle(int id)
         {
@@ -159,10 +160,15 @@ namespace Sportiga.Areas.Admin.Controllers
             _Context.RemoveRange(keywords);
             _Context.SaveChanges();
             var article = _Context.Articles.Find(id);
-            var catID = article.categoryId;
+            var path = Path.Combine(_IWeb.WebRootPath, "images", article.Image);
+
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
             _Context.Remove(article);
             _Context.SaveChanges();
-            return RedirectToAction("Index","Articles", catID);
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 
         [Authorize(Roles = "Admin,Desk")]
